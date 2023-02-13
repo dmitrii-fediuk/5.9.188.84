@@ -9,6 +9,7 @@
 # https://www.postfix.org/postconf.5.html#biff
 biff = no
 # 2019-07-21 https://support.plesk.com/hc/en-us/articles/360002867133-Plesk-notifications-are-not-sent-Postfix-is-running-with-backwards-compatible-default-settings
+# 2023-02-13 https://web.archive.org/web/20210619052315/https://support.plesk.com/hc/en-us/articles/360002867133-Plesk-notifications-are-not-sent-Postfix-is-running-with-backwards-compatible-default-settings
 compatibility_level = 2
 # 2020-01-06 "How to bind Postfix to localhost only?" https://df.tips/t/963
 inet_interfaces = 127.0.0.1
