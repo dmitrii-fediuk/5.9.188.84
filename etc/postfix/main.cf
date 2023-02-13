@@ -4,7 +4,7 @@ alias_maps = hash:/etc/aliases
 append_dot_mydomain = no
 biff = no
 # 2019-07-21 https://support.plesk.com/hc/en-us/articles/360002867133-Plesk-notifications-are-not-sent-Postfix-is-running-with-backwards-compatible-default-settings
-compatibility_level=2
+compatibility_level = 2
 # 2020-01-06 "How to bind Postfix to localhost only?" https://df.tips/t/963
 inet_interfaces = 127.0.0.1
 mailbox_size_limit = 0
@@ -17,7 +17,7 @@ recipient_delimiter = +
 relayhost = 
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-smtpd_use_tls=yes
+smtpd_use_tls = yes
