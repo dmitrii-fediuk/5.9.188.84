@@ -1,4 +1,12 @@
 # 2023-02-13 «Postfix main.cf file format» https://www.postfix.org/postconf.5.html
+# 2023-02-13
+# 1) Default: «yes».
+# 2) «Whether or not to use the local biff service.
+# This service sends "new mail" notifications to users who have requested new mail notification with the UNIX command "biff y".
+# For compatibility reasons this feature is on by default.
+# On systems with lots of interactive users, the biff service can be a performance drain.
+# Specify "biff = no" in main.cf to disable.»
+# https://www.postfix.org/postconf.5.html#biff
 biff = no
 # 2019-07-21 https://support.plesk.com/hc/en-us/articles/360002867133-Plesk-notifications-are-not-sent-Postfix-is-running-with-backwards-compatible-default-settings
 compatibility_level = 2
