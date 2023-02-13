@@ -1,3 +1,4 @@
+# 2023-02-13 «Postfix main.cf file format» https://www.postfix.org/postconf.5.html
 alias_database = hash:/etc/aliases
 alias_maps = hash:/etc/aliases
 append_dot_mydomain = no
