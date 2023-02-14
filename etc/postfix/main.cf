@@ -100,6 +100,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # it will still insist on a server certificate.»
 # https://www.postfix.org/postconf.5.html#smtpd_tls_cert_file
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
+# 2023-02-14 https://www.postfix.org/postconf.5.html#smtpd_tls_key_file
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
+# 2023-02-14  https://www.postfix.org/postconf.5.html#smtpd_tls_session_cache_database
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+# 2023-02-14
+# 1) Default: «no».
+# 2) «Opportunistic TLS: announce STARTTLS support to remote SMTP clients, but do not require that clients use TLS encryption.»
+# https://www.postfix.org/postconf.5.html#smtpd_use_tls
 smtpd_use_tls = yes
