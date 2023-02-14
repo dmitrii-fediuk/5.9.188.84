@@ -41,12 +41,14 @@ compatibility_level = 2
 # https://www.postfix.org/postconf.5.html#mydestination
 mydestination = localhost
 # 2023-02-14
-# «The internet hostname of this mail system.
+# 1) «The internet hostname of this mail system.
 # The default is to use the fully-qualified domain name (FQDN) from gethostname(),
 # or to use the non-FQDN result from gethostname() and append ".$mydomain".
 # $myhostname is used as a default value for many other configuration parameters.»
 # https://www.postfix.org/postconf.5.html#myhostname
-myhostname = magento-forum.ru
+# 2) Previously, I had the setting: `myhostname = magento-forum.ru`.
+# I have removed it because `magento-forum.ru` is the default value anyway (beause it is specified in the /etc/hostname file)
+
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 myorigin = /etc/mailname
 readme_directory = no
