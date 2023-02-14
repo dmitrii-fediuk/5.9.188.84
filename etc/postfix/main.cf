@@ -89,6 +89,16 @@ recipient_delimiter = +
 # This means that per-smtp-instance master.cf overrides of this parameter are not effective.»
 # https://www.postfix.org/postconf.5.html#smtp_tls_session_cache_database
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+# 2023-02-14
+# 1) Default: «».
+# 2) «File with the Postfix SMTP server RSA certificate in PEM format.
+# 2.1) This file may also contain the Postfix SMTP server private RSA key.
+# With Postfix ≥ 3.4 the preferred way to configure server keys and certificates is via the "smtpd_tls_chain_files" parameter.
+# 2.2) Public Internet MX hosts without certificates signed by a "reputable" CA must generate,
+# and be prepared to present to most clients, a self-signed or private-CA signed certificate.
+# The client will not be able to authenticate the server, but unless it is running Postfix 2.3 or similar software,
+# it will still insist on a server certificate.»
+# https://www.postfix.org/postconf.5.html#smtpd_tls_cert_file
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
