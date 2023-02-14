@@ -50,6 +50,14 @@ mydestination = localhost
 # I have removed it because `magento-forum.ru` is the default value anyway, because it is specified in the `/etc/hostname` file:
 # https://github.com/dmitrii-fediuk/5.9.188.84/blob/2023-02-14/etc/hostname#L1
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+# 2023-02-14
+# 1) Default: «$myhostname».
+# 2) The domain name that locally-posted mail appears to come from, and that locally posted mail is delivered to.
+# The default, $myhostname, is adequate for small sites.
+# If you run a domain with multiple machines, you should:
+#		(1) change this to $mydomain
+#		(2) set up a domain-wide alias database that aliases each user to user@that.users.mailhost.
+# https://www.postfix.org/postconf.5.html#myorigin
 myorigin = /etc/mailname
 readme_directory = no
 recipient_delimiter = +
