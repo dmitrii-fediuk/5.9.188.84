@@ -19,6 +19,26 @@ compatibility_level = 2
 # 2023-02-13
 # 1) https://www.postfix.org/postconf.5.html#inet_interfaces
 # 2) Previously, I had `inet_interfaces = 127.0.0.1`. I have removed it because I need Postfix to serve externall connections.
+# 2023-02-14
+# 1) Default: «$myhostname, localhost.$mydomain, localhost».
+# 2)
+# 2.1) «The list of domains that are delivered via the $local_transport mail delivery transport.
+# By default this is the Postfix `local(8)` delivery agent which looks up all recipients in `/etc/passwd` and `/etc/aliases`.
+# The SMTP server validates recipient addresses with `$local_recipient_maps` and rejects non-existent recipients.
+# See also the local domain class in the `ADDRESS_CLASS_README` file.
+# 2.2) The default mydestination value specifies names for the local machine only.
+# On a mail domain gateway, you should also include `$mydomain`.
+# The `$local_transport` delivery method is also selected for mail addressed to `user@[the.net.work.address]` of the mail system
+# (the IP addresses specified with the `inet_interfaces` and `proxy_interfaces` parameters).
+# 2.3) Warnings:
+# 2.3.1) Do not specify the names of virtual domains - those domains are specified elsewhere.
+# See `VIRTUAL_README` for more information.
+# 2.3.2) Do not specify the names of domains that this machine is backup `MX` host for.
+# See `STANDARD_CONFIGURATION_README` for how to set up backup `MX` hosts.
+# 2.3.3_ By default, the Postfix SMTP server rejects mail for recipients not listed with the `local_recipient_maps` parameter.
+# See the `postconf(5)` manual
+# for a description of the `local_recipient_maps` and `unknown_local_recipient_reject_code` parameters.
+# https://www.postfix.org/postconf.5.html#mydestination
 mydestination = localhost
 myhostname = magento-forum.ru
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
