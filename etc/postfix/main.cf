@@ -52,11 +52,11 @@ mydestination = localhost
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 # 2023-02-14
 # 1) Default: «$myhostname».
-# 2) The domain name that locally-posted mail appears to come from, and that locally posted mail is delivered to.
+# 2) «The domain name that locally-posted mail appears to come from, and that locally posted mail is delivered to.
 # The default, $myhostname, is adequate for small sites.
 # If you run a domain with multiple machines, you should:
 #		(1) change this to $mydomain
-#		(2) set up a domain-wide alias database that aliases each user to user@that.users.mailhost.
+#		(2) set up a domain-wide alias database that aliases each user to user@that.users.mailhost.»
 # https://www.postfix.org/postconf.5.html#myorigin
 # 3) `/etc/mailname` contains «magento-forum.ru»: https://github.com/dmitrii-fediuk/5.9.188.84/blob/2023-02-14-2/etc/mailname#L1
 myorigin = /etc/mailname
@@ -66,6 +66,19 @@ myorigin = /etc/mailname
 # that describe how to build, configure or operate a specific Postfix subsystem or feature.»
 # https://www.postfix.org/postconf.5.html#readme_directory
 readme_directory = no
+# 2023-02-14
+# 1) Default: «».
+# 2) 2.1) «The set of characters that can separate an email address localpart, user name, or a `.forward` file name
+# from its extension.
+# For example, with "recipient_delimiter = +",
+# the software tries user+foo@example.com before trying user@example.com, user+foo before trying user, and .forward+foo
+# before trying .forward.
+# 2.2) More formally, an email address localpart or user name is separated from its extension
+# by the first character that matches the `recipient_delimiter` set.
+# The delimiter character and extension may then be used to generate an extended `.forward` file name.
+# This implementation recognizes one delimiter character and one extension per email address localpart or email address.
+# With Postfix 2.10 and earlier, the recipient_delimiter specifies a single character.»
+# https://www.postfix.org/postconf.5.html#recipient_delimiter
 recipient_delimiter = +
 relayhost = 
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
