@@ -89,7 +89,6 @@ recipient_delimiter = +
 # This means that per-smtp-instance master.cf overrides of this parameter are not effective.»
 # https://www.postfix.org/postconf.5.html#smtp_tls_session_cache_database
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
