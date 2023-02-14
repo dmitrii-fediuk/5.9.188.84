@@ -19,7 +19,6 @@ compatibility_level = 2
 # 2023-02-13
 # 1) https://www.postfix.org/postconf.5.html#inet_interfaces
 # 2) Previously, I had `inet_interfaces = 127.0.0.1`. I have removed it because I need Postfix to serve externall connections.
-mailbox_size_limit = 0
 mydestination = localhost
 myhostname = magento-forum.ru
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
