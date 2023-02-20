@@ -5,6 +5,7 @@ Server settings for `5.9.188.84`.
 ### Connection
 ```
 ssh root@5.9.188.84
+ssh www-data@5.9.188.84
 ```
 
 ### Restart a service
