@@ -1,0 +1,47 @@
+# The official Debian repository
+deb http://ftp.debian.org/debian stable main contrib non-free
+# The Debian source code.
+# It could be needed to compile something manually.
+# E.g., I have used it to compile PHP and PHP extensions manually.
+deb-src http://ftp.debian.org/debian stable main contrib non-free
+
+# Debian updates
+deb http://ftp.debian.org/debian/ buster-updates main contrib non-free
+deb-src http://ftp.debian.org/debian/ buster-updates main contrib non-free
+
+# Debian security updates
+deb http://security.debian.org/ buster/updates main contrib non-free
+deb-src http://security.debian.org/ buster/updates main contrib non-free
+
+# 2017-12-28
+# 1) "The proposed-updates mechanism": https://www.debian.org/releases/proposed-updates.html
+# 2) "How to fix «Failed to fetch ftp://ftp.debian.org/debian/dists/jessie-proposed-updates/InRelease»?":
+# https://df.tips/t/274
+deb http://ftp.us.debian.org/debian buster-proposed-updates main contrib non-free
+
+# PostgreSQL 9.5
+deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main 9.5
+
+# For Docker
+# 2017-04-29
+# Now it is used to install Certbot too.
+# I use Certbot to install and automatically update my Let's Encrypt certificates.
+# https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-debian-8#step-1-install-certbot-the-let-39-s-encrypt-client
+deb http://ftp.debian.org/debian buster-backports main
+
+# 2017-04-29 For PHP 7.1: https://mage2.pro/t/2428
+# 2018-01-19 "How to fix «GPG error» for «packages.sury.org»?": https://df.tips/t/334
+# 2018-02-21 You should install `apt-transport-https` first:
+# 		aptitude install apt-transport-https
+# https://askubuntu.com/a/517693
+deb https://packages.sury.org/php/ buster main
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+
+# 2020-01-05 For MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/#create-a-etc-apt-sources-list-d-mongodb-org-4-2-list-file-for-mongodb
+deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main
+
+# 2020-01-05 For MongoDB: https://stackoverflow.com/a/16575040
+# deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
+
+# 2023-02-26 "Install Elasticsearch 7": https://github.com/dmitrii-fediuk/5.9.188.84/issues/1
+deb https://artifacts.elastic.co/packages/7.x/apt stable main
