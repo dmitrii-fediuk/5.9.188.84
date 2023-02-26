@@ -10,6 +10,7 @@ ssh www-data@5.9.188.84
 
 ### Restart a service
 ```              
+service elasticsearch restart
 service nginx restart                   
 service postfix restart 
 ```
