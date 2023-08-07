@@ -20,7 +20,13 @@ deb-src http://security.debian.org/ buster/updates main contrib non-free
 deb http://ftp.us.debian.org/debian buster-proposed-updates main contrib non-free
 
 # PostgreSQL 9.5
-deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main 9.5
+# 2023-08-08
+# 1) «Err http://apt.postgresql.org/pub/repos/apt trusty-pgdg Release» / «404 Not Found [IP: 2a02:c0:301:0:ffff::27 80]»:
+# https://github.com/dmitrii-fediuk/5.9.188.84/issues/6
+# 2) "How did I fix «Err http://apt.postgresql.org/pub/repos/apt trusty-pgdg Release»
+# / «404 Not Found [IP: 2a02:c0:301:0:ffff::27 80]»?": https://df.tips/t/1840
+# 3) I replaced «trusty» with «buster» (similar to https://github.com/dmitrii-fediuk/5.9.188.84/issues/5).
+deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main 9.5
 
 # For Docker
 # 2017-04-29
