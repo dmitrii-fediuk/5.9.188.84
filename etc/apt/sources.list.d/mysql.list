@@ -1,8 +1,13 @@
 ### THIS FILE IS AUTOMATICALLY CONFIGURED ###
 # You may comment out entries below, but any other modifications may be lost.
 # Use command 'dpkg-reconfigure mysql-apt-config' as root for modifications.
-deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ jessie mysql-apt-config
-deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ jessie mysql-5.7
-#deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ jessie mysql-tools
-#deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ jessie mysql-tools-preview
-deb-src [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+# 2023-08-07 Dmitrii Fediuk https://www.upwork.com/fl/mage2pro
+# 1) "«The detected system (debian jessie) is not supported by MySQL»
+# on `dpkg-reconfigure mysql-apt-config` on Debian10 (Buster)": https://github.com/dmitrii-fediuk/5.9.188.84/issues/5
+# 2) https://df.tips/t/1837
+# 3) I replaced «jessie» with «buster».
+deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-apt-config
+deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-5.7
+#deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-tools
+#deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-tools-preview
+deb-src [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-5.7
