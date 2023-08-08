@@ -1,2 +1,3 @@
-deb https://deb.nodesource.com/node_0.12 jessie main
-deb-src https://deb.nodesource.com/node_0.12 jessie main
+# 2023-08-08 I changed «jessie» to «buster».
+deb https://deb.nodesource.com/node_0.12 buster main
+deb-src https://deb.nodesource.com/node_0.12 buster main
