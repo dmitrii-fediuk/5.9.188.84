@@ -43,8 +43,12 @@ deb http://ftp.debian.org/debian buster-backports main
 deb https://packages.sury.org/php/ buster main
 deb [arch=amd64] https://download.docker.com/linux/debian buster stable
 
-# 2020-01-05 For MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/#create-a-etc-apt-sources-list-d-mongodb-org-4-2-list-file-for-mongodb
-deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main
+# 2020-01-05
+# For MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/#create-a-etc-apt-sources-list-d-mongodb-org-4-2-list-file-for-mongodb
+# 2023-08-25
+# 1) "Upgrade MongoDB from 4.2 to 6": https://github.com/dmitrii-fediuk/5.9.188.84/issues/20
+# 2) "How did I upgrade MongoDB from 4.2 to 6 on Debian 10 (Buster)?": https://df.tips/t/1943
+deb [signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg] http://repo.mongodb.org/apt/debian buster/mongodb-org/6.0 main
 
 # 2020-01-05 For MongoDB: https://stackoverflow.com/a/16575040
 # deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
