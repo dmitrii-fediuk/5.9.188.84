@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    for binary in php phar phar.phar; do
+        update-alternatives \
+	    --install /usr/bin/${binary} ${binary} /usr/bin/${binary}7.1 71 \
+	    --slave /usr/share/man/man1/${binary}.1.gz ${binary}.1.gz /usr/share/man/man1/${binary}7.1.1.gz
+    done
+fi
+
+CONFDIR=/etc/php/7.1/cli/conf.d
+
+if [ "$1" = "configure" ]; then
+    phpini="/etc/php/7.1/cli/php.ini"
+
+    if [ "cli" = "cli" ]; then
+	ucf /usr/lib/php/7.1/php.ini-production.cli $phpini
+    else
+	ucf /usr/lib/php/7.1/php.ini-production $phpini
+    fi
+    # 2023-08-24 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+    # 1) «ucfr: Attempt from package php7.1-fpm to take /etc/php/7.1/common/php.ini away from package php7.1-cli»:
+    # https://github.com/dmitrii-fediuk/5.9.188.84/issues/18
+    # 2) "How did I fix
+    # «ucfr: Attempt from package php7.1-cli to take /etc/php/7.1/fpm/php.ini away from package php7.1-fpm»?":
+    # https://df.tips/t/275/4
+    # 3) I have commented the following line out:
+    # 		ucfr php7.1-cli $phpini
+    # 4) https://www.commandlinux.com/man-page/man1/ucfr.1.html
+    # 5) https://www.commandlinux.com/man-page/man1/ucf.1.html
+
+    if [ -e /usr/lib/php/php-maintscript-helper ]; then
+	. /usr/lib/php/php-maintscript-helper
+	
+	mods=$(phpquery -M -v 7.1)
+	for mod in $mods; do
+	    php_invoke enmod 7.1 cli $mod
+	done
+    fi
+
+    if [ -n "$2" ] && dpkg --compare-versions "$2" lt "7.0.3-2~"; then
+	rm -f /etc/php/7.1/cli/conf.d/20-opcache.ini;
+    fi	    
+fi
+
+
+
+exit 0
