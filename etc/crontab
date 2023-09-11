@@ -26,7 +26,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # I have disabled the command for OroCRM because I do not use OroCRM anymore:
 # (I use the bare bone Oro Platform instead).
 # */1 * * * * www-data php /var/www/crm/app/console oro:cron --env=prod > /dev/null
-*/1 * * * * www-data php /var/www/erp/bin/console oro:cron --env=prod > /dev/null
+*/1 * * * * www-data php7.2 /var/www/erp/bin/console oro:cron --env=prod > /dev/null
 
 # 2017-04-29 Let's Encrypt certificates update: https://serverfault.com/a/790776
 @daily www-data sudo certbot renew && sudo service nginx restart
