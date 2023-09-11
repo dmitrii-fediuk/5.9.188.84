@@ -16,14 +16,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 */30 * * * * www-data php7.2 /var/www/m2/sandbox/bin/magento cron:run
 */30 * * * * www-data php7.2 /var/www/portal/bin/magento cron:run
 
-* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/lilouplaisir.mage2.pro/var/log/magento.cron.log
-* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/update/cron.php >> /var/www/lilouplaisir.mage2.pro/var/log/update.cron.log
-* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/bin/magento setup:cron:run >> /var/www/lilouplaisir.mage2.pro/var/log/setup.cron.log
-
-* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/canadasatellite2.mage2.pro/var/log/magento.cron.log
-* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/update/cron.php >> /var/www/canadasatellite2.mage2.pro/var/log/update.cron.log
-* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/bin/magento setup:cron:run >> /var/www/canadasatellite2.mage2.pro/var/log/setup.cron.log
-
 # 2019-05-09 Somebody overloads my PHP-FPM. Restarting it seems to solve the problem.
 # */15 * * * * root service php7.2-fpm restart
 
