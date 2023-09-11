@@ -1,0 +1,85 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user command
+17 * * * * root cd / && run-parts --report /etc/cron.hourly
+25 6 * * * root test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6 * * 7 root test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6 1 * * root test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+
+*/30 * * * * www-data /bin/sh /var/www/server.magento-forum.ru/cron.sh
+# 2017-07-05
+# Почему-то иначе накапливаются гигабайты данных как в папке «cache», так и в папке «session».
+# Использую «> /dev/null», потому что для некоторых папок почему-то происходит сбой «Directory not empty».
+@monthly www-data rm -rf /var/www/server.magento-forum.ru/var/* > /dev/null
+
+*/30 * * * * www-data php7.2 /var/www/m2/sandbox/bin/magento cron:run
+*/30 * * * * www-data php7.2 /var/www/portal/bin/magento cron:run
+
+* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/lilouplaisir.mage2.pro/var/log/magento.cron.log
+* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/update/cron.php >> /var/www/lilouplaisir.mage2.pro/var/log/update.cron.log
+* * * * * www-data php7.2 /var/www/lilouplaisir.mage2.pro/bin/magento setup:cron:run >> /var/www/lilouplaisir.mage2.pro/var/log/setup.cron.log
+
+* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/canadasatellite2.mage2.pro/var/log/magento.cron.log
+* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/update/cron.php >> /var/www/canadasatellite2.mage2.pro/var/log/update.cron.log
+* * * * * www-data php7.2 /var/www/canadasatellite2.mage2.pro/bin/magento setup:cron:run >> /var/www/canadasatellite2.mage2.pro/var/log/setup.cron.log
+
+# 2019-05-09 Somebody overloads my PHP-FPM. Restarting it seems to solve the problem.
+# */15 * * * * root service php7.2-fpm restart
+
+# 2017-07-09 https://meta.discourse.org/t/65842/2
+@weekly root yes | /usr/local/discourse/launcher cleanup > /dev/null
+
+# 2017-05-30
+# I have disabled the command for OroCRM because I do not use OroCRM anymore:
+# (I use the bare bone Oro Platform instead).
+# */1 * * * * www-data php /var/www/crm/app/console oro:cron --env=prod > /dev/null
+*/1 * * * * www-data php /var/www/erp/bin/console oro:cron --env=prod > /dev/null
+
+# 2017-04-29 Let's Encrypt certificates update: https://serverfault.com/a/790776
+@daily www-data sudo certbot renew && sudo service nginx restart
+
+# 2019-05-09 Database tables optimization. The task takes ~ 1 minute.
+17 4 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=bb81e8cbe140d4e96c0b23e3a8d09da0"
+
+# 2019-05-09 Ends frozen MySQL processes. The task takes < 1 second.
+*/41 * * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=f7aa2f54249234ba8e460bea3e92d03a"
+
+# Удаление старых сессий, регистрационных изображений, результатов поиска
+# 2019-05-09 The task takes < 1 second.
+*/59 * * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=63ab5eb78b5ff75dd55eafaf1eb64430"
+
+# 2019-05-09 Ежедневный пересчет статистики. The task takes < 1 second.
+43 */3 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=373d058b5b623370c9e334d74de676e9"
+
+# 2019-05-09 Очистка кеша OpenID. The task takes < 1 second.
+30 1 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=9c8e956c8efea91352e65c9ab3c74797"
+
+# 2019-05-09 Очистка кеша. The task takes < 1 second.
+33 3 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=371db5bd489731eae5976a745b66b007"
+
+# 2019-05-09 Очиска отметок. The task takes < 1 second.
+46 6 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=ea1d816523b1c7a610a023f4de07f41b"
+
+# 2019-05-09 Очистка журналов событий. The task takes < 1 second.
+0 6 * * 1 www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=d8d081e0afff0e61b675486d96c98e9d"
+
+# 2019-05-09 Обновление счетчика просмотра темы. The task takes < 1 second.
+*/19 * * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=8f678af45465ddc483eb3153679ecf76"
+
+# 2019-05-09 Удаление подписок на темы и старых меток о прочтении тем. The task takes < 1 second.
+15 3 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=0d075fe1f5889c191c6c41d7d5899232"
+
+# 2019-05-09 Обновляет счетчики просмотра профиля пользователя. The task takes 1 second.
+30 3 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=d54108fc87bf1d766016202f4297cd5d"
+
+# Generates a sitemap for your forum.
+# 2019-05-04 The task takes 4 seconds.
+33 * * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=43d648924fdf158aef6be56ef746bd18"
+
+# Deletes old search visitor logs.
+# 2019-05-09 The task takes < 1 second.
+44 4 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=acc7b6efece59914b2934baba8de88a1"
+
+# ===========================================================
+# 2018-10-12 A crontab should ends with a newline: https://serverfault.com/a/230407
