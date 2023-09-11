@@ -1,0 +1,38 @@
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+# http://fredericiana.com/2009/10/21/keeping-ssh-from-disconnecting-automatically
+ClientAliveInterval 300
+ClientAliveCountMax 3333
+GSSAPIAuthentication no
+HostbasedAuthentication no
+# Закрытые ключи сервера.
+# Пока не совсем понял, где и для чего они используются в контексте подключения клиентов к нашему серверу.
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+IgnoreRhosts yes
+LogLevel INFO
+# Клиент должен авторизоваться за 2 минуты.
+LoginGraceTime 120
+PermitEmptyPasswords no
+PermitRootLogin yes
+# Документация: http://man.cx/sshd_config(5)
+# Этот файл задаёт настройки для подключения по SSH клиентов к нашему серверу.
+# Настройки подключения по SSH нашего сервера к другим серверам в качестве клиента задаются в файле sshd_config.
+Port 22
+Protocol 2
+PubkeyAuthentication yes
+# Перед авторизацией проверяет права доступа к домашней папке
+StrictModes yes
+SyslogFacility AUTH
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+Subsystem sftp /usr/lib/openssh/sftp-server
+UsePAM yes
+UsePrivilegeSeparation yes
+X11Forwarding yes
+X11DisplayOffset 10
