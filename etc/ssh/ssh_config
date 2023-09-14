@@ -1,54 +1,46 @@
-# Документация: http://man.cx/sshd_config(5)
-# Этот файл задаёт настройки для подключения по SSH нашего сервера к другим серверам в качестве клиента.
-# Настройки подключения по SSH клиентов к нашему серверу задаются в файле sshd_config.
-
-# Configuration data is parsed as follows:
-#  1. command line options
-#  2. user-specific file
-#  3. system-wide file
-# Any configuration value is only changed the first time it is set.
-# Thus, host-specific definitions should be at the beginning of the
-# configuration file, and defaults at the end.
-
-# Site-wide defaults for some commonly used options.  For a comprehensive
-# list of available options, their meanings and defaults, please see the
-# ssh_config(5) man page.
-
+# 2023-09-14
+# 1) «OpenSSH client configuration file (`ssh_config`) syntax»: https://df.tips/t/1966
+# 2) https://www.ssh.com/academy/ssh/config
 Host *
-#   ForwardAgent no
-#   ForwardX11 no
-#   ForwardX11Trusted yes
-#   RhostsRSAAuthentication no
-#   RSAAuthentication yes
-#   PasswordAuthentication yes
-#   HostbasedAuthentication no
-#   GSSAPIAuthentication no
-#   GSSAPIDelegateCredentials no
-#   GSSAPIKeyExchange no
-#   GSSAPITrustDNS no
-#   BatchMode no
-#   CheckHostIP yes
-#   AddressFamily any
-#   ConnectTimeout 0
-#   StrictHostKeyChecking ask
-#   IdentityFile ~/.ssh/identity
-#   IdentityFile ~/.ssh/id_rsa
-#   IdentityFile ~/.ssh/id_dsa
-#   Port 22
-#   Protocol 2,1
-#   Cipher 3des
-#   Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
-#   MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160
-#   EscapeChar ~
-#   Tunnel no
-#   TunnelDevice any:any
-#   PermitLocalCommand no
-#   VisualHostKey no
-#   ProxyCommand ssh -q -W %h:%p gateway.example.com
-#   RekeyLimit 1G 1h
-    SendEnv LANG LC_*
-    #HashKnownHosts yes
-    #GSSAPIAuthentication yes
-    HashKnownHosts no
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
+	# 2023-09-14
+	# 1) «Sets the number of server alive messages (see below) 
+	# which may be sent without ssh(1) receiving any messages back from the server. 
+	# If this threshold is reached while server alive messages are being sent, 
+	# ssh will disconnect from the server, terminating the session. 
+	# It is important to note that the use of server alive messages is very different from TCPKeepAlive (below). 
+	# The server alive messages are sent through the encrypted channel and therefore will not be spoofable.
+	# The TCP keepalive option enabled by TCPKeepAlive is spoofable. 
+	# The server alive mechanism is valuable
+	# when the client or server depend on knowing when a connection has become inactive.
+	# The default value is 3. 
+	# If, for example, ServerAliveInterval (see below) is set to 15 and ServerAliveCountMax is left at the default, 
+	# if the server becomes unresponsive, ssh will disconnect after approximately 45 seconds. 
+	# This option applies to protocol version 2 only.»
+	# https://linux.die.net/man/5/ssh_config
+	# 2) «Server alive messages are useful when an SSH server has been configured to close connections
+	# after a period of time with no traffic
+	# (shared web-hosting providers that offer SSH access almost always do this for example).
+	# Setting these two options sends a packet every ServerAliveInterval seconds,
+	# for a maximum of ServerAliveCountMax times thus keeping the session alive.»
+	# https://serverfault.com/a/927030
+	ServerAliveCountMax 9999999
+	# 2023-09-14
+	# 1) «Sets a timeout interval in seconds after which if no data has been received from the server, 
+	# ssh(1) will send a message through the encrypted channel to request a response from the server. 
+	# The default is 0, indicating that these messages will not be sent to the server. 
+	# This option applies to protocol version 2 only.»
+	# https://linux.die.net/man/5/ssh_config
+	# 2) «Specifies interval for sending keepalive messages to the server.
+	# The messages are sent through the encrypted channel,
+	# and serve to detect if the server has crashed or the network has gone down.»
+	# https://www.ssh.com/academy/ssh/config#listing-of-client-configuration-options
+	ServerAliveInterval 30
+	# 2020-05-11 https://unix.stackexchange.com/a/334440
+	# 2023-09-14
+	# «Specifies whether to send TCP keepalives to the other side. 
+	# These operate on the level of the TCP protocol.
+	# Sending keepalives helps properly close the socket when the network or server goes down.
+	# On the other hand, without it, the connection may stay alive and any windows open,
+	# even if the network is down for a while.»
+	# https://www.ssh.com/academy/ssh/config#listing-of-client-configuration-options
+	TCPKeepAlive true
