@@ -39,7 +39,6 @@ ClientAliveCountMax 8640
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_rsa_key
-PermitEmptyPasswords no
 PermitRootLogin yes
 # Документация: http://man.cx/sshd_config(5)
 # Этот файл задаёт настройки для подключения по SSH клиентов к нашему серверу.
