@@ -52,7 +52,6 @@ ClientAliveCountMax 8640
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_rsa_key
-IgnoreRhosts yes
 LogLevel INFO
 # Клиент должен авторизоваться за 2 минуты.
 LoginGraceTime 120
