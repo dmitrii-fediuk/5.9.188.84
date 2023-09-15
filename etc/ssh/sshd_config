@@ -1,4 +1,14 @@
 # Allow client to pass locale environment variables
+# 2023-09-15
+# «Specifies what environment variables sent by the client will be copied into the session's `environ`.
+# See `SendEnv` in `ssh_config` for how to configure the client.
+# Note that environment passing is only supported for protocol 2.
+# Variables are specified by name, which may contain the wildcard characters '*' and '?'.
+# Multiple environment variables may be separated by whitespace or spread across multiple `AcceptEnv` directives.
+# Be warned that some environment variables could be used to bypass restricted user environments.
+# For this reason, care should be taken in the use of this directive.
+# The default is not to accept any environment variables.»
+# https://linux.die.net/man/5/sshd_config
 AcceptEnv LANG LC_*
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
