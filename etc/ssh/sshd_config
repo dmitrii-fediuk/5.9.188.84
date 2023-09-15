@@ -40,10 +40,9 @@ HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_rsa_key
 PrintMotd no
-SyslogFacility AUTH
-TCPKeepAlive yes
 Subsystem sftp /usr/lib/openssh/sftp-server
+TCPKeepAlive yes
 UsePAM yes
 UsePrivilegeSeparation yes
-X11Forwarding yes
 X11DisplayOffset 10
+X11Forwarding yes
