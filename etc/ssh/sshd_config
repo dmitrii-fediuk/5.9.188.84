@@ -53,6 +53,5 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # https://linux.die.net/man/5/sshd_config
 # 2) «If you're using `ClientAliveInterval`, you can disable `TCPKeepAlive`»: https://unix.stackexchange.com/a/329600
 TCPKeepAlive no
-UsePrivilegeSeparation yes
 X11DisplayOffset 10
 X11Forwarding yes
