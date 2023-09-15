@@ -11,8 +11,11 @@
 # https://linux.die.net/man/5/sshd_config
 # 2) I have disabled this feature.
 # AcceptEnv LANG LC_*
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
+# 2023-09-15
+# «Specifies whether challenge-response authentication is allowed
+# «(e.g. via PAM or though authentication styles supported in `login.conf`).
+# «The default is ''yes''.»
+# https://linux.die.net/man/5/sshd_config
 ChallengeResponseAuthentication no
 # http://fredericiana.com/2009/10/21/keeping-ssh-from-disconnecting-automatically
 ClientAliveInterval 300
