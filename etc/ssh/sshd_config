@@ -40,7 +40,6 @@ HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_rsa_key
 PrintMotd no
-PubkeyAuthentication yes
 # Перед авторизацией проверяет права доступа к домашней папке
 StrictModes yes
 SyslogFacility AUTH
