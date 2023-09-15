@@ -42,7 +42,7 @@ HostKey /etc/ssh/ssh_host_rsa_key
 PrintMotd no
 Subsystem sftp /usr/lib/openssh/sftp-server
 # 2023-09-15
-# «Specifies whether the system should send TCP keepalive messages to the other side.
+# 1) «Specifies whether the system should send TCP keepalive messages to the other side.
 # If they are sent, death of the connection or crash of one of the machines will be properly noticed
 # However, this means that connections will die if the route is down temporarily, and some people find it annoying.
 # On the other hand, if TCP keepalives are not sent, sessions may hang indefinitely on the server,
@@ -51,6 +51,7 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # and the server will notice if the network goes down or the client host crashes.
 # This avoids infinitely hanging sessions.»
 # https://linux.die.net/man/5/sshd_config
+# «If you're using `ClientAliveInterval`, you can disable `TCPKeepAlive`»: https://unix.stackexchange.com/a/329600
 TCPKeepAlive no
 UsePAM yes
 UsePrivilegeSeparation yes

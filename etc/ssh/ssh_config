@@ -52,4 +52,4 @@ Host *
 	# This is important in scripts, and many users want it too.
 	# To disable TCP keepalive messages, the value should be set to ''no''.»
 	# https://linux.die.net/man/5/ssh_config
-	TCPKeepAlive no 
+	TCPKeepAlive no
