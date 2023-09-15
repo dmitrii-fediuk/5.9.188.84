@@ -39,13 +39,13 @@ ClientAliveCountMax 8640
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_rsa_key
+PrintLastLog yes
+PrintMotd no
 Protocol 2
 PubkeyAuthentication yes
 # Перед авторизацией проверяет права доступа к домашней папке
 StrictModes yes
 SyslogFacility AUTH
-PrintMotd no
-PrintLastLog yes
 TCPKeepAlive yes
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
