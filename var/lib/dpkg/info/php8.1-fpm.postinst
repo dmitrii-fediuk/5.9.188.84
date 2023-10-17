@@ -35,7 +35,16 @@ if [ "$1" = "configure" ]; then
     else
 	ucf /usr/lib/php/8.1/php.ini-production $phpini
     fi
-    ucfr php8.1-fpm $phpini
+    # 2023-10-17 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+    # 1) «ucfr: Attempt from package php8.1-fpm to take /etc/php/8.1/common/php.ini away from package php8.1-cli»:
+    # https://github.com/dmitrii-fediuk/5.9.188.84/issues/53
+    # 2) "How did I fix
+    # «ucfr: Attempt from package php8.1-fpm to take /etc/php/8.1/common/php.ini away from package php8.1-cli»?":
+    # https://df.tips/t/2024
+    # 3) I have commented the following line out:
+    # 		ucfr php8.1-fpm $phpini
+    # 4) https://www.commandlinux.com/man-page/man1/ucfr.1.html
+    # 5) https://www.commandlinux.com/man-page/man1/ucf.1.html
 
     if [ -e /usr/lib/php/php-maintscript-helper ]; then
 	. /usr/lib/php/php-maintscript-helper
