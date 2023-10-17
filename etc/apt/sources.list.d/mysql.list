@@ -6,8 +6,8 @@
 # on `dpkg-reconfigure mysql-apt-config` on Debian10 (Buster)": https://github.com/dmitrii-fediuk/5.9.188.84/issues/5
 # 2) https://df.tips/t/1837
 # 3) I replaced «jessie» with «buster».
-deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-apt-config
-deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-5.7
+deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ bookworm mysql-apt-config
+deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ bookworm mysql-5.7
 #deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-tools
 #deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-tools-preview
-deb-src [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ buster mysql-5.7
+deb-src [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] http://repo.mysql.com/apt/debian/ bookworm mysql-5.7

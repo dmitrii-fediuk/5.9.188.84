@@ -6,18 +6,18 @@ deb http://ftp.debian.org/debian stable main contrib non-free
 deb-src http://ftp.debian.org/debian stable main contrib non-free
 
 # Debian updates
-deb http://ftp.debian.org/debian/ buster-updates main contrib non-free
-deb-src http://ftp.debian.org/debian/ buster-updates main contrib non-free
+deb http://ftp.debian.org/debian/ bookworm-updates main contrib non-free
+deb-src http://ftp.debian.org/debian/ bookworm-updates main contrib non-free
 
 # Debian security updates
-deb http://security.debian.org/ buster/updates main contrib non-free
-deb-src http://security.debian.org/ buster/updates main contrib non-free
+deb http://security.debian.org/ bookworm/updates main contrib non-free
+deb-src http://security.debian.org/ bookworm/updates main contrib non-free
 
 # 2017-12-28
 # 1) "The proposed-updates mechanism": https://www.debian.org/releases/proposed-updates.html
 # 2) "How to fix «Failed to fetch ftp://ftp.debian.org/debian/dists/jessie-proposed-updates/InRelease»?":
 # https://df.tips/t/274
-deb http://ftp.us.debian.org/debian buster-proposed-updates main contrib non-free
+deb http://ftp.us.debian.org/debian bookworm-proposed-updates main contrib non-free
 
 # PostgreSQL 9.5
 # 2023-08-08
@@ -26,30 +26,30 @@ deb http://ftp.us.debian.org/debian buster-proposed-updates main contrib non-fre
 # 2) "How did I fix «Err http://apt.postgresql.org/pub/repos/apt trusty-pgdg Release»
 # / «404 Not Found [IP: 2a02:c0:301:0:ffff::27 80]»?": https://df.tips/t/1840
 # 3) I replaced «trusty» with «buster» (similar to https://github.com/dmitrii-fediuk/5.9.188.84/issues/5).
-deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main 9.5
+deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main 9.5
 
 # For Docker
 # 2017-04-29
 # Now it is used to install Certbot too.
 # I use Certbot to install and automatically update my Let's Encrypt certificates.
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-debian-8#step-1-install-certbot-the-let-39-s-encrypt-client
-deb http://ftp.debian.org/debian buster-backports main
+deb http://ftp.debian.org/debian bookworm-backports main
 
 # 2017-04-29 For PHP 7.1: https://mage2.pro/t/2428
 # 2018-01-19 "How to fix «GPG error» for «packages.sury.org»?": https://df.tips/t/334
 # 2018-02-21 You should install `apt-transport-https` first:
 # 		aptitude install apt-transport-https
 # https://askubuntu.com/a/517693
-deb https://packages.sury.org/php/ buster main
+deb https://packages.sury.org/php/ bookworm main
 
-deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable
 
 # 2020-01-05
 # For MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/#create-a-etc-apt-sources-list-d-mongodb-org-4-2-list-file-for-mongodb
 # 2023-08-25
 # 1) "Upgrade MongoDB from 4.2 to 6": https://github.com/dmitrii-fediuk/5.9.188.84/issues/20
 # 2) "How did I upgrade MongoDB from 4.2 to 6 on Debian 10 (Buster)?": https://df.tips/t/1943
-deb [signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg] http://repo.mongodb.org/apt/debian buster/mongodb-org/6.0 main
+deb [signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/6.0 main
 
 # 2020-01-05 For MongoDB: https://stackoverflow.com/a/16575040
 # deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
