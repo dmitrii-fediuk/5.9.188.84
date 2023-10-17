@@ -10,8 +10,8 @@ deb http://ftp.debian.org/debian/ bookworm-updates main contrib non-free
 deb-src http://ftp.debian.org/debian/ bookworm-updates main contrib non-free
 
 # Debian security updates
-deb http://security.debian.org/ bookworm/updates main contrib non-free
-deb-src http://security.debian.org/ bookworm/updates main contrib non-free
+deb http://security.debian.org/ stable-security/updates main contrib non-free
+deb-src http://security.debian.org/ stable-security/updates main contrib non-free
 
 # 2017-12-28
 # 1) "The proposed-updates mechanism": https://www.debian.org/releases/proposed-updates.html
