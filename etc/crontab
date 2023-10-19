@@ -29,7 +29,11 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 */1 * * * * www-data php7.2 /var/www/erp/bin/console oro:cron --env=prod > /dev/null
 
 # 2017-04-29 Let's Encrypt certificates update: https://serverfault.com/a/790776
-@daily www-data sudo certbot renew && sudo service nginx restart
+# 2023-10-19
+# 1) https://stackoverflow.com/a/25669618
+# 2) "Nginx became down after switching Debian 10 from SysVinit to Systemd:
+# «Failed to start nginx.service - LSB: starts the nginx web server»": https://github.com/dmitrii-fediuk/5.9.188.84/issues/43
+@daily www-data sudo certbot renew ; sudo service nginx stop && sudo service nginx start
 
 # 2019-05-09 Database tables optimization. The task takes ~ 1 minute.
 17 4 * * * www-data curl -s -o /dev/null "https://magento-forum.ru/index.php?app=core&module=task&ck=bb81e8cbe140d4e96c0b23e3a8d09da0"
