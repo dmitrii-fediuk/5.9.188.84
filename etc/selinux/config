@@ -1,14 +1,15 @@
-# This file controls the state of SELinux on the system.
-# SELINUX= can take one of these three values:
-# enforcing - SELinux security policy is enforced.
-# permissive - SELinux prints warnings instead of enforcing.
-# disabled - No SELinux policy is loaded.
-SELINUX=permissive
+# 2023-10-19
+# 1) «cannot create user data directory: failed to verify SELinux context of /root/snap:
+# exec: "matchpathcon": executable file not found in $PATH»: https://github.com/dmitrii-fediuk/5.9.188.84/issues/54
+# 2) "How did I solve «cannot create user data directory: failed to verify SELinux context of /root/snap:
+# exec: "matchpathcon": executable file not found in $PATH» for Certbot / Let's Encrypt?": https://df.tips/t/2033
+# 3.1) https://forum.snapcraft.io/t/11100/11
+# 3.2) https://github.com/PowerShell/PowerShell/issues/9252#issuecomment-486954264
+SELINUX=disabled
 # SELINUXTYPE= can take one of these two values:
 # default - equivalent to the old strict and targeted policies
 # mls     - Multi-Level Security (for military and educational use)
 # src     - Custom policy built from source
 SELINUXTYPE=default
-
 # SETLOCALDEFS= Check local definition changes
 SETLOCALDEFS=0
