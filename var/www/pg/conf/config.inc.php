@@ -1,4 +1,5 @@
 <?php
+# 2024-01-29 "Refactor `config.inc.php` for phpPgAdmin": https://github.com/dmitrii-fediuk/5.9.188.84/issues/57
 if (!function_exists('df_servers')) {
 	/**
 	 * @param array(string => int) $servers
