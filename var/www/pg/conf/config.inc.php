@@ -12,7 +12,8 @@ $conf = [
 			,14584 => 'maian.family'
 			,14585 => 'rc.plus'
 			,14587 => 'dmitry.ai'
-			,14588 => 'rpa.how'
+			# 2024-01-29 "Configure phpPgAdmin for `tr.guide`" https://github.com/dmitrii-fediuk/5.9.188.84/issues/56
+			,14588 => 'tr.guide'
 		];
 		return array_map(function(int $port, string $desc):array {return [
 			'defaultdb' => 'discourse'
