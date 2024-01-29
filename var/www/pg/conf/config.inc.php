@@ -2,10 +2,10 @@
 # 2024-01-29 "Refactor `config.inc.php` for phpPgAdmin": https://github.com/dmitrii-fediuk/5.9.188.84/issues/57
 if (!function_exists('df_servers')) {
 	/**
-	 * @param array(string => int) $servers
+	 * @param array(string => int) $ss
 	 * @return array(array(string => string|int))
 	 */
-	function df_servers(array $servers) {return array_map('df_server', array_keys($servers), array_values($servers));}
+	function df_servers(array $ss):array {return array_map('df_server', array_keys($ss), array_values($ss));}
 	if (!function_exists('df_server')) {
 		/**
 		 * @return array(string => string|int)
