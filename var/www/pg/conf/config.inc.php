@@ -3,18 +3,18 @@
 $conf = [
 	'servers' => (function() {
 		$ss = [
-			'mage2.ru' => 14578
-			,'discourse-forum.ru' => 14579
-			,'mage2.pro' => 14580
-			,'discourse.pro' => 14581
-			,'df.tips' => 14582
-			,'oplatform.club' => 14583
-			,'maian.family' => 14584
-			,'rc.plus' => 14585
-			,'dmitry.ai' => 14587
-			,'rpa.how' => 14588
+			14578 => 'mage2.ru'
+			,14579 => 'discourse-forum.ru'
+			,14580 =>'mage2.pro'
+			,14581 => 'discourse.pro'
+			,14582 => 'df.tips'
+			,14583 => 'oplatform.club'
+			,14584 => 'maian.family'
+			,14585 => 'rc.plus'
+			,14587 => 'dmitry.ai'
+			,14588 => 'rpa.how'
 		];
-		return array_map(function(string $desc, int $port):array {return [
+		return array_map(function(int $port, string $desc):array {return [
 			'defaultdb' => 'discourse'
 			,'desc' => $desc
 			,'host' => 'localhost'
