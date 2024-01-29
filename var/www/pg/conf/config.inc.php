@@ -9,11 +9,9 @@ if (!function_exists('df_servers')) {
 	}
 	if (!function_exists('df_server')) {
 		/**
-		 * @param string $desc
-		 * @param int $port
 		 * @return array(string => string|int)
 		 */
-		function df_server($desc, $port) {return [
+		function df_server(string $desc, int $port):array {return [
 			'desc' => $desc
 			, 'port' => $port
 			, 'host' => 'localhost'
