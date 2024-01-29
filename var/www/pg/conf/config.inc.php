@@ -12,13 +12,13 @@ if (!function_exists('df_servers')) {
 		 * @return array(string => string|int)
 		 */
 		function df_server(string $desc, int $port):array {return [
-			'desc' => $desc
-			, 'port' => $port
-			, 'host' => 'localhost'
-			, 'sslmode' => 'allow'
-			, 'defaultdb' => 'discourse'
-			, 'pg_dump_path' => '/usr/bin/pg_dump'
-			, 'pg_dumpall_path' => '/usr/bin/pg_dumpall'
+			'defaultdb' => 'discourse'
+			,'desc' => $desc
+			,'host' => 'localhost'
+			,'pg_dump_path' => '/usr/bin/pg_dump'
+			,'pg_dumpall_path' => '/usr/bin/pg_dumpall'
+			,'port' => $port
+			,'sslmode' => 'allow'
 		]; }
 	}
 }
