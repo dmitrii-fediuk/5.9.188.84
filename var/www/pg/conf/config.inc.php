@@ -4,9 +4,7 @@ if (!function_exists('df_servers')) {
 	 * @param array(string => int) $servers
 	 * @return array(array(string => string|int))
 	 */
-	function df_servers(array $servers) {
-		return array_map('df_server', array_keys($servers), array_values($servers));
-	}
+	function df_servers(array $servers) {return array_map('df_server', array_keys($servers), array_values($servers));}
 	if (!function_exists('df_server')) {
 		/**
 		 * @return array(string => string|int)
