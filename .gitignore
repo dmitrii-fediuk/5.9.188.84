@@ -1,6 +1,7 @@
 # 2023-02-13 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
 /_my
 /etc/backup.d
+/root/.pgpass
 /usr/local/discourse/containers
 /usr/local/nginx/conf/assets/securepay.ufc.ge/.pem
 /usr/local/nginx/conf/assets/securepay.ufc.ge/password.txt
