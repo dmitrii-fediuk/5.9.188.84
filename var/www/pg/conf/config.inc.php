@@ -5,21 +5,15 @@ if (!function_exists('df_servers')) {
 	 * @param array(string => int) $ss
 	 * @return array(array(string => string|int))
 	 */
-	function df_servers(array $ss):array {return array_map('df_server', array_keys($ss), array_values($ss));}
-	if (!function_exists('df_server')) {
-		/**
-		 * @return array(string => string|int)
-		 */
-		function df_server(string $desc, int $port):array {return [
-			'defaultdb' => 'discourse'
-			,'desc' => $desc
-			,'host' => 'localhost'
-			,'pg_dump_path' => '/usr/bin/pg_dump'
-			,'pg_dumpall_path' => '/usr/bin/pg_dumpall'
-			,'port' => $port
-			,'sslmode' => 'allow'
-		]; }
-	}
+	function df_servers(array $ss):array {return array_map(function(string $desc, int $port):array {return [
+		'defaultdb' => 'discourse'
+		,'desc' => $desc
+		,'host' => 'localhost'
+		,'pg_dump_path' => '/usr/bin/pg_dump'
+		,'pg_dumpall_path' => '/usr/bin/pg_dumpall'
+		,'port' => $port
+		,'sslmode' => 'allow'
+	]; }, array_keys($ss), array_values($ss));}
 }
 $conf['servers'] = df_servers([
 	'mage2.ru' => 14578
