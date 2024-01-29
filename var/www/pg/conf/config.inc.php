@@ -1,26 +1,28 @@
 <?php
 # 2024-01-29 "Refactor `config.inc.php` for phpPgAdmin": https://github.com/dmitrii-fediuk/5.9.188.84/issues/57
-$ss = [
-	'mage2.ru' => 14578
-	,'discourse-forum.ru' => 14579
-	,'mage2.pro' => 14580
-	,'discourse.pro' => 14581
-	,'df.tips' => 14582
-	,'oplatform.club' => 14583
-	,'maian.family' => 14584
-	,'rc.plus' => 14585
-	,'dmitry.ai' => 14587
-	,'rpa.how' => 14588
-];
-$conf['servers'] = array_map(function(string $desc, int $port):array {return [
-	'defaultdb' => 'discourse'
-	,'desc' => $desc
-	,'host' => 'localhost'
-	,'pg_dump_path' => '/usr/bin/pg_dump'
-	,'pg_dumpall_path' => '/usr/bin/pg_dumpall'
-	,'port' => $port
-	,'sslmode' => 'allow'
-]; }, array_keys($ss), array_values($ss));
+$conf['servers'] = (function() {
+	$ss = [
+		'mage2.ru' => 14578
+		,'discourse-forum.ru' => 14579
+		,'mage2.pro' => 14580
+		,'discourse.pro' => 14581
+		,'df.tips' => 14582
+		,'oplatform.club' => 14583
+		,'maian.family' => 14584
+		,'rc.plus' => 14585
+		,'dmitry.ai' => 14587
+		,'rpa.how' => 14588
+	];
+	return array_map(function(string $desc, int $port):array {return [
+		'defaultdb' => 'discourse'
+		,'desc' => $desc
+		,'host' => 'localhost'
+		,'pg_dump_path' => '/usr/bin/pg_dump'
+		,'pg_dumpall_path' => '/usr/bin/pg_dumpall'
+		,'port' => $port
+		,'sslmode' => 'allow'
+	]; }, array_keys($ss), $ss);
+})();
 $conf['default_lang'] = 'auto';
 $conf['autocomplete'] = 'default on';
 $conf['extra_login_security'] = false;
