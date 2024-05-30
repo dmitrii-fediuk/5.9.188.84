@@ -15,6 +15,7 @@
 !/usr/local/discourse/containers/mage2.ru.yml
 !/usr/local/discourse/containers/maian.family.yml
 !/usr/local/discourse/containers/oplatform.club.yml
+!/usr/local/discourse/containers/tr.guide.yml
 /usr/local/discourse/credentials.yml
 /usr/local/nginx/conf/assets/securepay.ufc.ge/.pem
 /usr/local/nginx/conf/assets/securepay.ufc.ge/password.txt

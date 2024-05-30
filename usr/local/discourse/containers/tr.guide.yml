@@ -1,0 +1,69 @@
+env:
+  DISCOURSE_DEVELOPER_EMAILS: 'admin@tr.guide'
+  DISCOURSE_HOSTNAME: 'tr.guide'
+  DISCOURSE_SMTP_ADDRESS: smtp.postmarkapp.com
+  DISCOURSE_SMTP_ENABLE_START_TLS: true
+  DISCOURSE_SMTP_PORT: 587
+  DISCOURSE_SMTP_USER_NAME: PM-T-outbound-85ylSjsEQpLZm674rSpbSi
+  LANG: en_US.UTF-8 # 2020-09-05 https://meta.discourse.org/t/151236#lc-collate-values-for-database-%E2%80%9Cpostgres%E2%80%9D-do-not-match
+  LANGUAGE: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+  my: 'https://github.com/discourse-pro/'
+  # «How many concurrent web requests are supported? With 2GB we recommend 3-4 workers, with 1GB only 2.»
+  UNICORN_WORKERS: 4
+expose:
+  - "14588:5432" # PostgreSQL
+  - "2231:22" # SSH
+  - "4588:80"
+hooks:
+  after_code:
+    - exec:
+        cd: $home/plugins
+        cmd:
+          - mkdir -p plugins
+          - git clone https://github.com/discourse/discourse-post-voting
+          - git clone https://github.com/discourse/discourse-solved
+          - git clone https://github.com/discourse/discourse-vk-auth
+          # «The docker manager plugin allows you to one-click upgrade Discourse»
+          - git clone https://github.com/discourse/docker_manager
+          - git clone ${my}df-core
+          - git clone ${my}df-core-private
+          #- git clone ${my}df-github-blob-onebox
+          - git clone ${my}df-qa
+          - git clone ${my}russian-localization
+params:
+  db_default_text_search_config: "pg_catalog.english"
+  upload_size: 60m # 2018-06-18 https://meta.discourse.org/t/26435/2
+  version: tests-passed
+run:
+  - exec: echo "Beginning of custom commands"
+  # 2022-08-14 «Installing a Theme programatically»: https://meta.discourse.org/t/191843
+  - file:
+      path: /tmp/mythemes.yml
+      # 2022-08-14 «DiscoTOC - automatic table of contents»: https://meta.discourse.org/t/111143
+      contents: |
+        toc:
+          url: https://github.com/discourse/DiscoTOC.git
+          add_to_all_themes: true
+  - exec:
+      cd: $home
+      cmd: su discourse -c 'bundle exec rake themes:install < /tmp/mythemes.yml'
+  - exec: echo "End of custom commands"
+  - exec: awk -F\# '{print $1;}' ~/.ssh/authorized_keys | awk 'BEGIN { print "Authorized SSH keys for this container:"; } NF>=2 {print $NF;}'
+templates:
+# 2024-05-30
+# "Consolidate the sensitive data from all Discourse YML files to a single YML file,
+# and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
+  - "credentials.yml"
+  - "templates/postgres.template.yml"
+  - "templates/redis.template.yml"
+  - "templates/sshd.template.yml"
+  - "templates/web.template.yml"
+# «These containers are stateless, all data is stored in /shared»
+volumes:
+  - volume:
+      guest: /shared
+      host: /usr/local/discourse/shared/tr.guide
+  - volume:
+      guest: /var/log
+      host: /usr/local/discourse/shared/tr.guide/log/var-log
