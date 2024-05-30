@@ -10,6 +10,7 @@
 !/usr/local/discourse/containers/df.tips.yml
 !/usr/local/discourse/containers/discourse-forum.ru.yml
 !/usr/local/discourse/containers/discourse.pro.yml
+!/usr/local/discourse/containers/dmitry.ai.yml
 !/usr/local/discourse/containers/oplatform.club.yml
 /usr/local/discourse/credentials.yml
 /usr/local/nginx/conf/assets/securepay.ufc.ge/.pem
