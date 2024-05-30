@@ -1,3 +1,5 @@
+# "[Discourse] «Your local changes to the following files would be overwritten by merge:
+# templates/postgres.template.yml» on `./launcher rebuild`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/61
 params:
   db_synchronous_commit: "off"
   db_shared_buffers: "256MB"
@@ -256,7 +258,6 @@ run:
       tag: db
       hook: postgres
       cmd:
-        # give db a few secs to start up
         - "sleep 60"
         - /usr/local/bin/create_db
         - "echo postgres installed!"
