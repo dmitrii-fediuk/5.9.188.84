@@ -29,7 +29,6 @@ hooks:
           - git clone ${my}df-core-private
           #- git clone ${my}df-github-blob-onebox
           - git clone ${my}df-qa
-          - git clone ${my}russian-localization
 params:
   db_default_text_search_config: "pg_catalog.english"
   ## Set db_shared_buffers to a max of 25% of the total memory.
