@@ -6,3 +6,9 @@ env:
   DISCOURSE_SMTP_ENABLE_START_TLS: true
   DISCOURSE_SMTP_PORT: 587
   DISCOURSE_SMTP_USER_NAME: PM-T-outbound-85ylSjsEQpLZm674rSpbSi
+  # 2020-09-05 https://meta.discourse.org/t/151236#lc-collate-values-for-database-%E2%80%9Cpostgres%E2%80%9D-do-not-match
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+  my: 'https://github.com/discourse-pro/'
+  UNICORN_WORKERS: 4 # «How many concurrent web requests are supported? With 2GB we recommend 3-4 workers, with 1GB only 2.»
