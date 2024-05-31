@@ -2,3 +2,7 @@
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
 env:
+  DISCOURSE_SMTP_ADDRESS: smtp.postmarkapp.com
+  DISCOURSE_SMTP_ENABLE_START_TLS: true
+  DISCOURSE_SMTP_PORT: 587
+  DISCOURSE_SMTP_USER_NAME: PM-T-outbound-85ylSjsEQpLZm674rSpbSi
