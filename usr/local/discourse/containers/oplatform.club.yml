@@ -1,7 +1,6 @@
 env:
   DISCOURSE_DEVELOPER_EMAILS: 'admin@oplatform.club'
   DISCOURSE_HOSTNAME: 'oplatform.club'
-  DISCOURSE_LOAD_MINI_PROFILER: false
 expose:
   - "14583:5432" # PostgreSQL
   - "2227:22" # SSH
