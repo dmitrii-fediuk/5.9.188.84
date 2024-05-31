@@ -22,7 +22,6 @@ templates:
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
   - "templates-my/2.yml"
-# «These containers are stateless, all data is stored in /shared»
 volumes:
   - volume:
       guest: /shared
