@@ -26,7 +26,7 @@ templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
-  - "container.yml"
+  - "templates-my/1.yml"
 # 2024-05-30
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
 # and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
