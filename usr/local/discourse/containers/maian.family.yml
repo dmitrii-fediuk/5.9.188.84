@@ -10,6 +10,7 @@ templates:
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
   - "templates-my/1.yml"
+  - "templates-my/db/small.yml"
   - "templates-my/ru.yml"
 # 2024-05-30
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
