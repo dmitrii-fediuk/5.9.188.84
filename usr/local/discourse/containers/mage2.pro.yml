@@ -21,7 +21,6 @@ hooks:
           #- git clone ${my}df-github-blob-onebox
           - git clone ${my}df-qa
 params:
-  db_default_text_search_config: "pg_catalog.english"
   ## Set db_shared_buffers to a max of 25% of the total memory.
   ## On 1GB installs set to 128MB (to leave room for other processes)
   ## on a 4GB instance you may raise to 1GB
@@ -30,8 +29,6 @@ params:
   ## Set higher on large instances it defaults to 10MB, for a 3GB install 40MB is a good default
   ## this improves sorting performance, but adds memory usage per-connection
   db_work_mem: "40MB"
-  upload_size: 60m # 2018-06-18 https://meta.discourse.org/t/26435/2
-  version: tests-passed
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
@@ -45,6 +42,10 @@ templates:
   - "templates/redis.template.yml"
   - "templates/sshd.template.yml"
   - "templates/web.template.yml"
+# 2024-05-31
+# "Consolidate the duplicated code from all Discourse YML files to a single file":
+# https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
+  - "container-2.yml"
 ## These containers are stateless, all data is stored in /shared
 volumes:
   - volume:
