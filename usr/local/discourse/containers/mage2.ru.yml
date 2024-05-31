@@ -32,7 +32,6 @@ templates:
   - "credentials.yml"
   - "templates/postgres.template.yml"
   - "templates/redis.template.yml"
-  - "templates/sshd.template.yml"
   - "templates/web.template.yml"
 # «These containers are stateless, all data is stored in /shared»
 volumes:
