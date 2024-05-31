@@ -29,6 +29,5 @@ hooks:
           #- git clone ${my}df-github-blob-onebox
           - git clone ${my}df-qa
 params:
-  db_default_text_search_config: "pg_catalog.english"
   upload_size: 60m # 2018-06-18 https://meta.discourse.org/t/26435/2
   version: tests-passed
