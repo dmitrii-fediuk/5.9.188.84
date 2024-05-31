@@ -13,3 +13,18 @@ env:
   LC_ALL: en_US.UTF-8
   my: 'https://github.com/discourse-pro/'
   UNICORN_WORKERS: 4 # «How many concurrent web requests are supported? With 2GB we recommend 3-4 workers, with 1GB only 2.»
+run:
+  - exec: echo "Beginning of custom commands"
+  # 2022-08-14 «Installing a Theme programatically»: https://meta.discourse.org/t/191843
+  - file:
+      path: /tmp/mythemes.yml
+      # 2022-08-14 «DiscoTOC - automatic table of contents»: https://meta.discourse.org/t/111143
+      contents: |
+        toc:
+          url: https://github.com/discourse/DiscoTOC.git
+          add_to_all_themes: true
+  - exec:
+      cd: $home
+      cmd: su discourse -c 'bundle exec rake themes:install < /tmp/mythemes.yml'
+  - exec: echo "End of custom commands"
+  - exec: awk -F\# '{print $1;}' ~/.ssh/authorized_keys | awk 'BEGIN { print "Authorized SSH keys for this container:"; } NF>=2 {print $NF;}'
