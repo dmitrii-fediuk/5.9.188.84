@@ -1,11 +1,6 @@
 env:
   DISCOURSE_DEVELOPER_EMAILS: 'admin@mage2.pro'
   DISCOURSE_HOSTNAME: 'mage2.pro'
-  LANG: en_US.UTF-8 # 2020-09-05 https://meta.discourse.org/t/151236#lc-collate-values-for-database-%E2%80%9Cpostgres%E2%80%9D-do-not-match
-  LANGUAGE: en_US.UTF-8
-  LC_ALL: en_US.UTF-8
-  my: 'https://github.com/discourse-pro/'
-  UNICORN_WORKERS: 4
 expose:
   - "14580:5432" # PostgreSQL
   - "2224:22" # SSH
