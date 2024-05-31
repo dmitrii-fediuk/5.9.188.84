@@ -5,20 +5,12 @@ expose:
   - "14580:5432" # PostgreSQL
   - "2224:22" # SSH
   - "4580:80"
-params:
-  ## Set db_shared_buffers to a max of 25% of the total memory.
-  ## On 1GB installs set to 128MB (to leave room for other processes)
-  ## on a 4GB instance you may raise to 1GB
-  # 2018-01-23 "The default Discourse's `db_shared_buffers` value is 256Mb": https://discourse.pro/t/283
-  db_shared_buffers: "1GB"
-  ## Set higher on large instances it defaults to 10MB, for a 3GB install 40MB is a good default
-  ## this improves sorting performance, but adds memory usage per-connection
-  db_work_mem: "40MB"
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
   - "templates-my/1.yml"
+  - "templates-my/large.yml"
 # 2024-05-30
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
 # and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
