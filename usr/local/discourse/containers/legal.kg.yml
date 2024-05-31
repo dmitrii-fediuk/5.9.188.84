@@ -26,21 +26,6 @@ params:
   db_default_text_search_config: "pg_catalog.english"
   upload_size: 60m # 2018-06-18 https://meta.discourse.org/t/26435/2
   version: tests-passed
-run:
-  - exec: echo "Beginning of custom commands"
-  # 2022-08-14 «Installing a Theme programatically»: https://meta.discourse.org/t/191843
-  - file:
-      path: /tmp/mythemes.yml
-      # 2022-08-14 «DiscoTOC - automatic table of contents»: https://meta.discourse.org/t/111143
-      contents: |
-        toc:
-          url: https://github.com/discourse/DiscoTOC.git
-          add_to_all_themes: true
-  - exec:
-      cd: $home
-      cmd: su discourse -c 'bundle exec rake themes:install < /tmp/mythemes.yml'
-  - exec: echo "End of custom commands"
-  - exec: awk -F\# '{print $1;}' ~/.ssh/authorized_keys | awk 'BEGIN { print "Authorized SSH keys for this container:"; } NF>=2 {print $NF;}'
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
