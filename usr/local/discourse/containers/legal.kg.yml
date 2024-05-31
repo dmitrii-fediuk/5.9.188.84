@@ -22,10 +22,6 @@ hooks:
           #- git clone ${my}df-github-blob-onebox
           - git clone ${my}df-qa
           - git clone ${my}russian-localization
-params:
-  db_default_text_search_config: "pg_catalog.english"
-  upload_size: 60m # 2018-06-18 https://meta.discourse.org/t/26435/2
-  version: tests-passed
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
