@@ -1,0 +1,9 @@
+run:
+  # 2018-01-23
+  - exec: echo "TEST!!!!!!!!!!!!!!!!!!!!!!"
+  # 2018-01-24
+  #- exec: sudo mount -o rw,remount /sys
+  #- exec: sudo chmod o+w /sys/kernel/mm/transparent_hugepage/enabled
+  #- exec: sudo chmod o+w /sys/kernel/mm/transparent_hugepage/defrag
+  #- exec: sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled
+  #- exec: sudo echo never > /sys/kernel/mm/transparent_hugepage/defrag

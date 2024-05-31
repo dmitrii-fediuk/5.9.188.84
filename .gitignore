@@ -3,19 +3,9 @@
 /etc/backup.d
 /etc/mysql/credentials.cnf
 /root/.pgpass
-/usr/local/discourse/containers/*
 # 2024-05-29
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
 # and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
-!/usr/local/discourse/containers/df.tips.yml
-!/usr/local/discourse/containers/discourse-forum.ru.yml
-!/usr/local/discourse/containers/discourse.pro.yml
-!/usr/local/discourse/containers/dmitry.ai.yml
-!/usr/local/discourse/containers/mage2.pro.yml
-!/usr/local/discourse/containers/mage2.ru.yml
-!/usr/local/discourse/containers/maian.family.yml
-!/usr/local/discourse/containers/oplatform.club.yml
-!/usr/local/discourse/containers/tr.guide.yml
 /usr/local/discourse/credentials.yml
 /usr/local/nginx/conf/assets/securepay.ufc.ge/.pem
 /usr/local/nginx/conf/assets/securepay.ufc.ge/password.txt
