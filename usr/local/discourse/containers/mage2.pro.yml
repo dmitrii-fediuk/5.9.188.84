@@ -40,7 +40,6 @@ templates:
   - "credentials.yml"
   - "templates/postgres.template.yml"
   - "templates/redis.template.yml"
-  - "templates/sshd.template.yml"
   - "templates/web.template.yml"
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
