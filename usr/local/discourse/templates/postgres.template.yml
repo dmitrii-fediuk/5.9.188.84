@@ -3,7 +3,7 @@
 # templates/postgres.template.yml» on `./launcher rebuild`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/61
 params:
   db_synchronous_commit: "off"
-  # 2024-05-31 I moved `db_work_mem` and `db_shared_buffers` to `templates-my/db`
+  # 2024-05-31 I moved `db_shared_buffers` and `db_work_mem` to `templates-my/db`
   db_default_text_search_config: "pg_catalog.english"
   db_name: discourse
   db_user: discourse
