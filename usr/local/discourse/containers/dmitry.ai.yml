@@ -1,7 +1,6 @@
 env:
   DISCOURSE_DEVELOPER_EMAILS: 'admin@dmitry.ai'
   DISCOURSE_HOSTNAME: 'dmitry.ai'
-  DISCOURSE_LOAD_MINI_PROFILER: false
 expose:
   - "14587:5432" # PostgreSQL
   - "2230:22" # SSH
