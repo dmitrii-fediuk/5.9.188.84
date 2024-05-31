@@ -10,6 +10,7 @@ hooks:
     - exec:
         cd: $home/plugins
         cmd:
+          - mkdir -p plugins
           - git clone ${my}russian-localization
 templates:
 # 2024-05-31
