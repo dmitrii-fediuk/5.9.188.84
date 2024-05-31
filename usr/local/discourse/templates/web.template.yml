@@ -17,7 +17,7 @@ params:
   version: tests-passed
 
   home: /var/www/discourse
-  upload_size: 10m
+  # 2024-05-31 I moved `upload_size` to `templates-my/1.yml`
   nginx_worker_connections: 4000
 
 run:
