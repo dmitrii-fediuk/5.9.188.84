@@ -14,8 +14,7 @@ env:
 
 
 params:
-  version: tests-passed
-
+  # 2024-05-31 I moved `version` to `templates-my/1.yml`
   home: /var/www/discourse
   # 2024-05-31 I moved `upload_size` to `templates-my/1.yml`
   nginx_worker_connections: 4000
