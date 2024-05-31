@@ -5,13 +5,6 @@ expose:
   - "14579:5432" # PostgreSQL
   - "2223:22" # SSH
   - "4579:80"
-hooks:
-  after_code:
-    - exec:
-        cd: $home/plugins
-        cmd:
-          - mkdir -p plugins
-          - git clone ${my}russian-localization
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
