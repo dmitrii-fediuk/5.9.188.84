@@ -1,7 +1,7 @@
 env:
   # You can have redis on a different box
   RAILS_ENV: 'production'
-  UNICORN_WORKERS: 3
+  # 2024-05-31 I moved `UNICORN_WORKERS` to `templates-my/1.yml`
   UNICORN_SIDEKIQS: 1
   # stop heap doubling in size so aggressively, this conserves memory
   RUBY_GC_HEAP_GROWTH_MAX_SLOTS: 40000
