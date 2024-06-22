@@ -27,7 +27,7 @@ templates:
 volumes:
   - volume:
       guest: /shared
-      host: /usr/local/discourse/shared/tr.guide
+      host: /usr/local/discourse/shared/legal.kg
   - volume:
       guest: /var/log
-      host: /usr/local/discourse/shared/tr.guide/log/var-log
+      host: /usr/local/discourse/shared/legal.kg/log/var-log
