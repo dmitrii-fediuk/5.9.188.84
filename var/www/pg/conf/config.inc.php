@@ -13,6 +13,8 @@ $conf = [
 			,14587 => 'dmitry.ai'
 			# 2024-01-29 "Configure phpPgAdmin for `tr.guide`" https://github.com/dmitrii-fediuk/5.9.188.84/issues/56
 			,14588 => 'tr.guide'
+			# 2024-06-22 "Configure phpPgAdmin for `legal.kg`" https://github.com/dmitrii-fediuk/5.9.188.84/issues/65
+			,14589 => 'legal.kg'
 		];
 		return array_map(function(int $port, string $desc):array {return [
 			'defaultdb' => 'discourse'
