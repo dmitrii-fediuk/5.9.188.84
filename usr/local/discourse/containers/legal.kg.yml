@@ -5,7 +5,7 @@ env:
 expose:
   - "14589:5432" # PostgreSQL
   - "2232:22" # SSH
-  - "4589:80"
+  - "4590:80"
 templates:
 # 2024-05-31
 # "Consolidate the duplicated code from all Discourse YML files to a single file":
