@@ -3,8 +3,8 @@ env:
   DISCOURSE_DEVELOPER_EMAILS: 'admin@legal.kg'
   DISCOURSE_HOSTNAME: 'legal.kg'
 expose:
-  - "14588:5432" # PostgreSQL
-  - "2231:22" # SSH
+  - "14589:5432" # PostgreSQL
+  - "2232:22" # SSH
   - "4589:80"
 templates:
 # 2024-05-31
