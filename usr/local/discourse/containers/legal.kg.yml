@@ -12,7 +12,10 @@ templates:
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/63
   - "templates-my/1.yml"
   - "templates-my/small.yml"
-  - "templates-my/ru.yml"
+# 2024-07-07
+# "[Discourse] Remove the Russian localization because it is unused":
+# https://github.com/dmitrii-fediuk/5.9.188.84/issues/69
+#  - "templates-my/ru.yml"
 # 2024-05-30
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
 # and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
