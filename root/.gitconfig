@@ -7,4 +7,5 @@
 	required = true
 [user]
 	name = Dmitrii Fediuk
+	# 2024-07-07 https://git-scm.com/docs/git-config/#Documentation/git-config.txt-useremail
 	email = dfediuk@gmail.com
