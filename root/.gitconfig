@@ -6,5 +6,5 @@
 	smudge = git lfs smudge %f
 	required = true
 [user]
-	name = Дмитрий Федюк
-	email = admin@magento-forum.ru
+	name = Dmitrii Fediuk
+	email = dfediuk@gmail.com
