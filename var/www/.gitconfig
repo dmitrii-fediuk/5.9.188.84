@@ -1,3 +1,7 @@
 # 2024-07-06 "Improve `/root/.gitconfig` and `/var/www/.gitconfig`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/68
 [core]
 	autocrlf = input
+[user]
+	name = Dmitrii Fediuk
+	# 2024-07-07 https://git-scm.com/docs/git-config/#Documentation/git-config.txt-useremail
+	email = dfediuk@gmail.com
