@@ -1,10 +1,10 @@
 # 2024-07-06 "Improve `/root/.gitconfig` and `/var/www/.gitconfig`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/68
-[user]
-	name = Дмитрий Федюк
-	email = admin@magento-forum.ru
+[core]
+	autocrlf = input
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
 	required = true
-[core]
-	autocrlf = input
+[user]
+	name = Дмитрий Федюк
+	email = admin@magento-forum.ru
