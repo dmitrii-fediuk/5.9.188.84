@@ -5,6 +5,7 @@
 /root/.pgpass
 # 2024-07-16 "Refactor `/root/.ssh/*` files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/70
 /root/.ssh/id_rsa
+/root/.ssh/key256
 /root/.ssh/known_hosts
 # 2024-05-29
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
@@ -15,4 +16,5 @@
 /usr/share/backupninja
 # 2024-07-16 "Refactor `/var/www/.ssh/*` files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/71
 /var/www/.ssh/id_rsa
+/root/.ssh/key256
 /var/www/.ssh/known_hosts
