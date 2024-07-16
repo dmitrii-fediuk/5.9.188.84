@@ -1,0 +1,4 @@
+# 2024-07-16
+# 1) "Install OpenVPN Server": https://github.com/dmitrii-fediuk/5.9.188.84/issues/73
+# 2) "How did I install OpenVPN Server to Debian 12?": https://df.tips/t/2260
+deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/stable bookworm main
