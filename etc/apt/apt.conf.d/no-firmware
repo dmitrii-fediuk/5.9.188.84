@@ -5,4 +5,6 @@
 // 2.2) "How did I fix «N: Repository 'Debian bookworm' changed its 'non-free component' value
 // from 'non-free' to 'non-free non-free-firmware'» on Debian 12?": https://df.tips/t/2264
 // 2.3) https://unix.stackexchange.com/a/742797
+// 3) "How do I highlight the syntax of APT configuration files (`apt.conf`, `apt.conf.d/*`) in IntelliJ IDEA?":
+// https://df.tips/t/2265
 APT::Get::Update::SourceListWarnings::NonFreeFirmware "false";
