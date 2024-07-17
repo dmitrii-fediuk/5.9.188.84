@@ -7,6 +7,8 @@
 /root/.ssh/keys/*
 !/root/.ssh/keys/*.pub
 /root/.ssh/known_hosts
+# 2024-07-17 "Setup a Certificate Authority for OpenVPN": https://github.com/dmitrii-fediuk/5.9.188.84/issues/80
+/root/easy-rsa/pki/private
 # 2024-05-29
 # "Consolidate the sensitive data from all Discourse YML files to a single YML file,
 # and then add the rest Discourse YML files to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/60
