@@ -2,7 +2,7 @@
 /_my
 /etc/backup.d
 /etc/mysql/credentials.cnf
-# 2024-07-17 "Configure OpenVPN Server": https://github.com/dmitrii-fediuk/5.9.188.84/issues/79
+/etc/openvpn/client-configs/files
 /etc/openvpn/client-configs/keys/*.key
 /etc/openvpn/dh.pem
 /etc/openvpn/server.key
