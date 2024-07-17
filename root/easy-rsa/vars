@@ -1,0 +1,14 @@
+# 2024-07-17
+# 1) "Setup a Certificate Authority for OpenVPN": https://github.com/dmitrii-fediuk/5.9.188.84/issues/80
+# 2) "How did I set up a Certificate Authority for OpenVPN on Debian 12?": https://df.tips/t/2266
+# 3.1) https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-a-certificate-authority-ca-on-debian-11#step-3-creating-a-certificate-authority
+# 3.2) https://archive.is/v8rzP#step-3-creating-a-certificate-authority
+# 3.3) https://web.archive.org/web/20240717102805/https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-a-certificate-authority-ca-on-debian-11#step-3-creating-a-certificate-authority
+set_var EASYRSA_REQ_COUNTRY    "TR"
+set_var EASYRSA_REQ_PROVINCE   "Istanbul"
+set_var EASYRSA_REQ_CITY       "Istanbul"
+set_var EASYRSA_REQ_ORG        "Dmitrii Fediuk"
+set_var EASYRSA_REQ_EMAIL      "dfediuk@gmail.com"
+set_var EASYRSA_REQ_OU         "Community"
+set_var EASYRSA_ALGO           "ec"
+set_var EASYRSA_DIGEST         "sha512"
