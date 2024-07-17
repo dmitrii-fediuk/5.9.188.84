@@ -2,6 +2,8 @@
 /_my
 /etc/backup.d
 /etc/mysql/credentials.cnf
+# 2024-07-17 "Configure OpenVPN Server": https://github.com/dmitrii-fediuk/5.9.188.84/issues/79
+/etc/openvpn/server.key
 /root/.pgpass
 # 2024-07-16 "Refactor `/root/.ssh/*` files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/70
 /root/.ssh/keys/*
