@@ -210,7 +210,12 @@ run:
 
   - exec:
       tag: db
-      cmd: "[ -f /root/install_postgres ] && /root/install_postgres && rm -f /root/install_postgres"
+      cmd: |
+        if [ -f /root/install_postgres ]; then
+          /root/install_postgres && rm -f /root/install_postgres
+        elif [ -e /shared/postgres_run/.s.PGSQL.5432 ]; then
+          socat /dev/null UNIX-CONNECT:/shared/postgres_run/.s.PGSQL.5432 || exit 0 && echo postgres already running stop container ; exit 1
+        fi
 
   - exec:
       tag: db
@@ -231,9 +236,11 @@ run:
         su postgres -c 'psql template1 -c "create extension if not exists hstore;"'
         su postgres -c 'psql template1 -c "create extension if not exists pg_trgm;"'
         su postgres -c 'psql template1 -c "create extension if not exists vector;"'
+        su postgres -c 'psql template1 -c "alter extension vector update;"' || true
         su postgres -c 'psql $db_name -c "create extension if not exists hstore;"'
         su postgres -c 'psql $db_name -c "create extension if not exists pg_trgm;"'
         su postgres -c 'psql $db_name -c "create extension if not exists vector;"'
+        su postgres -c 'psql $db_name -c "alter extension vector update;"' || true
         sudo -u postgres psql $db_name <<< "update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = '$db_name' AND encoding = pg_char_to_encoding('SQL_ASCII');" || true
 
   - file:
