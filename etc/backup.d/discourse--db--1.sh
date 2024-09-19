@@ -14,6 +14,8 @@ declare -A servers=( \
 	[dmitry.ai]=14587 \
 	# 2024-09-20 "Automatically and regularly backup `tr.guide`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/100
 	[tr.guide]=14588 \
+	# 2024-09-20 "Automatically and regularly backup `legal.kg`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/99
+	[legal.kg]=14589 \
 )
 for domain in "${!servers[@]}"; do
 	pg_dump \
