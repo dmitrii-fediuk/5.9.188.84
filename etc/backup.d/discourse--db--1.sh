@@ -1,3 +1,4 @@
+# 2024-09-20 "Add the not-secure files inside `/etc/backup.d` to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/101
 when = hourly
 path=/var/backup/discourse/db/
 rm -rf ${path}
