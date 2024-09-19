@@ -12,6 +12,8 @@ declare -A servers=( \
 	[oplatform.club]=14583 \
 	[maian.family]=14584 \
 	[dmitry.ai]=14587 \
+	# 2024-09-20 "Automatically and regularly backup `tr.guide`": https://github.com/dmitrii-fediuk/5.9.188.84/issues/100
+	[tr.guide]=14588 \
 )
 for domain in "${!servers[@]}"; do
 	pg_dump \
