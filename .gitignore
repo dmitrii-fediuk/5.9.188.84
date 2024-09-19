@@ -1,6 +1,6 @@
 # 2023-02-13
 /_my
-/etc/backup.d
+/etc/backup.d/*
 # 2024-09-20 "Add the not-secure files inside `/etc/backup.d` to Git": https://github.com/dmitrii-fediuk/5.9.188.84/issues/101
 !/etc/backup.d/*.sh
 /etc/mysql/credentials.cnf
