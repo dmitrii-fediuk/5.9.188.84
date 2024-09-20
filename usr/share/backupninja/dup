@@ -28,7 +28,7 @@ getconf increments 30
 getconf keep 60
 getconf keepincroffulls all
 getconf desturl
-# 2024-09-20
+# 2024-09-20 Dmitrii Fediuk https://upwork.com/fl/mage2pro
 # 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
 # out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
 # 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
@@ -73,7 +73,7 @@ if [ -n "$signkey" -a -n "$encryptkey" -a "$signkey" != "$encryptkey" ]; then
    [ -n "$signpassword" ] || fatal "The signpassword option must be set because signkey is different from encryptkey."
 fi
 
-# 2024-09-20
+# 2024-09-20 Dmitrii Fediuk https://upwork.com/fl/mage2pro
 # 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
 # out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
 # 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
@@ -279,7 +279,7 @@ set +o noglob
 
 execstr_source=${execstr_source//\\*/\\\\\\*}
 
-# 2024-09-20
+# 2024-09-20 Dmitrii Fediuk https://upwork.com/fl/mage2pro
 # 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
 # out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
 # 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
