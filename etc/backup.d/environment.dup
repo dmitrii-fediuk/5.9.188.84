@@ -1,0 +1,49 @@
+when = everyday at 03:45
+
+options = --allow-source-mismatch --no-encryption --s3-european-buckets --s3-use-new-style --s3-unencrypted-connection --s3-use-multiprocessing --asynchronous-upload --volsize 2000 --archive-dir /var/backup/archive --name environment
+
+testconnect = no
+
+[gpg]
+# опция должна присутствовать, 
+# но она, похоже, не используется из-за ключа --no-encryption выше
+password = gunEp4ut
+
+[source]
+include = /etc
+# 2015-05-23
+# Сохраняем настройки пользователя root.
+# Настройки пользователя www-data сохраняются скриптом «other-sites--files.dup».
+include = /root
+exclude = /root/.aptitude
+exclude = /root/.cache
+exclude = /root/.composer/cache
+exclude = /root/.gem
+exclude = /root/.node-gyp
+exclude = /root/.npm
+exclude = /root/.subversion
+exclude = /root/duplicity
+exclude = /root/node_modules
+include = /usr/local/nginx/conf
+# Там расположены скомпилированные мной исполняемые файлы,
+# которые работают как сервисы: PHP-FPM и Nginx
+include = /usr/local/sbin
+
+[dest]
+incremental = yes
+# Срок хранения резервных копий (в днях).
+# Значение «keep» означает, что прежние резервные копии удалять не надо.
+keep = 120
+# Интервал в днях между созданием полных резервных копий
+# Значение «keep» означает, что повторные полные резервные копии не делаются,
+# а делаются только инкрементные.
+increments = 30
+# Количество полных резервных копий, для которых будут сохраняться дополнения.
+# Для более старых полных резервных копий дополнения будут удаляться.
+keepincroffulls = 2
+desturl = boto3+s3://h2-5.9.188.84/environment
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373

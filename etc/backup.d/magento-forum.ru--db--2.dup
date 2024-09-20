@@ -1,0 +1,74 @@
+# 2015-05-01
+# Благодаря оптимизации могу себе позволить ежечасные бэкапы.
+# В настоящее время 1000 запросов типа PUT на Amazon S3 стоят $0.005.
+# По текущему курсу (52 рубля за доллар) получается, что 1000 запросов стоят 26 копеек.
+#
+# Размер дампа базы данных magento_forum_ru без сжатия: 57 мегабайтов.
+# Размер полного бэкапа на Amazon S3: 11 мегабайтов.
+# Размер бэкапа-дополнения: меньше 1 мегабайта.
+#
+# Ограничения Amazon S3: http://stackoverflow.com/a/9028483/254475
+# Максимальное количество файлов в букете: неограничено.
+# Максимальный размер одного запроса PUT: 5Гб.
+# Максимальный размер букета: 5 Тб.
+#
+# 2017-05-26
+# Раньше здесь стояло: «when = hourly».
+# Уменьшил частоту бэкапов,
+# потому что частота обновления информации на magento-forum.ru падает и будет падать.
+when = everyday at 04:45
+when = everyday at 10:45
+when = everyday at 16:45
+when = everyday at 22:45
+
+# 2015-05-02
+# Обратите внимание, что мы не используем ключ «--s3-use-rrs» (Reduced Redundancy Storage)
+# по следующим причинам:
+# 1) Первый год после регистрации 5Гб стандартного хранилища бесплатны,
+# это называется «AWS Free Tier»: http://aws.amazon.com/free/
+# На Reduced Redundancy Storage бесплатного хранилища нет.
+#
+# 2) Вероятность потери объекта в стандартном хранилище в течение 1 года: 0.000000001%
+# Вероятность потери объекта в Reduced Redundancy Storage в течение 1 года: 0.01%
+# http://aws.amazon.com/s3/details/#durability
+#
+# При этом цена различается так:
+# Стандартное хранилище: $0.0300 per GB = 1.56 рублей в месяц за 1Гб.
+# Reduced Redundancy Storage: $0.0240 per GB = 1.25 рублей в месяц за 1Гб.
+#
+# Получается, что финансово выгоднее
+# использовать стандартное хранилище и реже делать полные резервные копии,
+# чем использовать Reduced Redundancy Storage и чаще делать полные резервные копии.
+#
+# Ведь дополнительная (более ранняя) полная резервная копия нужна, по сути,
+# только в случае потери файла из последней полной резервной копии.
+options = --allow-source-mismatch --no-encryption --s3-european-buckets --s3-use-new-style --s3-unencrypted-connection --s3-use-multiprocessing --asynchronous-upload --volsize 50 --archive-dir /var/backup/archive --name magento-forum.ru/db
+
+testconnect = no
+
+[gpg]
+# опция должна присутствовать, 
+# но она, похоже, не используется из-за ключа --no-encryption выше
+password = gunEp4ut
+
+[source]
+include = /var/backup/sqldump/magento_forum_ru.sql
+
+[dest]
+incremental = yes
+# Срок хранения резервных копий (в днях).
+# Значение «keep» означает, что прежние резервные копии удалять не надо.
+keep = 120
+# Интервал в днях между созданием полных резервных копий
+# Значение «keep» означает, что повторные полные резервные копии не делаются,
+# а делаются только инкрементные.
+increments = 30
+# Количество полных резервных копий, для которых будут сохраняться дополнения.
+# Для более старых полных резервных копий дополнения будут удаляться.
+keepincroffulls = 2
+desturl = boto3+s3://h2-5.9.188.84/magento-forum.ru/db
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373

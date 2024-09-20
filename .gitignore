@@ -9,7 +9,14 @@
 # 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
 # out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373
 # 3) https://github.com/dmitrii-fediuk/5.9.188.84/blob/2024-09-20/usr/share/backupninja/dup#L270-L271
+!/etc/backup.d/*.dup
 /etc/backup.d/0-credentials.sh
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373
+/etc/boto.cfg
 /etc/mysql/credentials.cnf
 /etc/openvpn/client-configs/files
 /etc/openvpn/client-configs/keys/*.key

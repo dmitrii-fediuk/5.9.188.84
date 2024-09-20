@@ -1,0 +1,39 @@
+options = --allow-source-mismatch --no-encryption --s3-european-buckets --s3-use-new-style --s3-unencrypted-connection --s3-use-multiprocessing --asynchronous-upload --volsize 2000 --archive-dir /var/backup/archive --name erp/files
+testconnect = no
+when = everyday at 04:45
+
+[gpg]
+# опция должна присутствовать, 
+# но она, похоже, не используется из-за ключа --no-encryption выше
+password = gunEp4ut
+
+[source]
+include = /var/www/erp
+exclude = /var/www/erp/app/cache/dev
+exclude = /var/www/erp/app/cache/prod
+exclude = /var/www/erp/app/logs/dev.log
+exclude = /var/www/erp/app/logs/prod.log
+
+[dest]
+incremental = yes
+# Стандартное хранилище стоит $0.03 (1.56 рублей) в месяц за 1 Гб.
+# Полная резервная копия файлов magento-forum.ru занимает почти 2 Гб.
+# Получается, хранение одной полной резервной копии будет стоить нам 3 рубля в месяц.
+# Думаю, нормально будет хранить 2 полные резервные копии.
+#
+# Срок хранения резервных копий (в днях).
+# Значение «keep» означает, что прежние резервные копии удалять не надо.
+keep = 120
+# Интервал в днях между созданием полных резервных копий
+# Значение «keep» означает, что повторные полные резервные копии не делаются,
+# а делаются только инкрементные.
+increments = 30
+# Количество полных резервных копий, для которых будут сохраняться дополнения.
+# Для более старых полных резервных копий дополнения будут удаляться.
+keepincroffulls = 2
+desturl = boto3+s3://h2-5.9.188.84/erp/files
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373

@@ -1,0 +1,52 @@
+when = everyday at 03:45
+
+# 2015-05-01
+# В настоящее время полная резервная копия занимает 157 Мб.
+# Указал размер тома «--volsize» 500 мегабайтов,
+# чтобы на Amazon S3 файлов было поменьше (удобнее смотреть).
+options = --allow-source-mismatch --no-encryption --s3-european-buckets --s3-use-new-style --s3-unencrypted-connection --s3-use-multiprocessing --asynchronous-upload --volsize 200 --archive-dir /var/backup/archive --name other-sites/db
+
+testconnect = no
+
+[gpg]
+# опция должна присутствовать, 
+# но она, похоже, не используется из-за ключа --no-encryption выше
+password = gunEp4ut
+
+[source]
+include = /var/backup/sqldump
+# Резервные копии важных баз данных (сайтов magento-forum.ru, code.dmitry-fedyuk.com, erp.mage2.pro)
+# делаются и отсылаются на Amazon S3 чаще и отдельными заданиями.
+# «**» означает, что шаблону соответствуют файлы на любом уровне вложенности папок
+# (мы используем это, чтобы не указывать каждый раз полный путь).
+exclude = **/erp.sql
+exclude = **/gitlab.sql
+exclude = **/magento_forum_ru.sql
+# Резервные копии системных баз данных не делаем,
+# потому что всё равно при текущей процедуре восстановления данных
+# нам придётся переустанавливать (а не восстанавливать из резервной копии) сервер баз данных,
+# и системные базы данных прошлого сервера баз данных
+# окажутся не только бесполезными, но и вредными.
+exclude = **/information_schema.sql
+exclude = **/mysql.sql
+exclude = **/performance_schema.sql
+exclude = **/sys.sql
+
+[dest]
+incremental = yes
+# Срок хранения резервных копий (в днях).
+# Значение «keep» означает, что прежние резервные копии удалять не надо.
+keep = 120
+# Интервал в днях между созданием полных резервных копий
+# Значение «keep» означает, что повторные полные резервные копии не делаются,
+# а делаются только инкрементные.
+increments = 30
+# Количество полных резервных копий, для которых будут сохраняться дополнения.
+# Для более старых полных резервных копий дополнения будут удаляться.
+keepincroffulls = 2
+desturl = boto3+s3://h2-5.9.188.84/other-sites/db
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373
