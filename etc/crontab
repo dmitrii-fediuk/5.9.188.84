@@ -20,7 +20,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # */15 * * * * root service php7.2-fpm restart
 
 # 2017-07-09 https://meta.discourse.org/t/65842/2
-@weekly root yes | /usr/local/discourse/launcher cleanup > /dev/null
+# 2024-09-20
+# 1) "Automatically cleanup unused Docker images": https://github.com/dmitrii-fediuk/5.9.188.84/issues/106
+# 2) "How do I run `./launcher cleanup` for Discourse via Cron (without typing `Y` or `N`)": https://discourse.pro/t/348
+@weekly root docker image prune -a -f > /dev/null
 
 # 2017-05-30
 # I have disabled the command for OroCRM because I do not use OroCRM anymore:
