@@ -73,9 +73,16 @@ if [ -n "$signkey" -a -n "$encryptkey" -a "$signkey" != "$encryptkey" ]; then
    [ -n "$signpassword" ] || fatal "The signpassword option must be set because signkey is different from encryptkey."
 fi
 
-if [ "`echo $desturl | /usr/bin/awk -F ':' '{print $1}'`" == "s3+http" ]; then
-   [ -n "$awsaccesskeyid" -a -n "$awssecretaccesskey" ]  || fatal "AWS access keys must be set for S3 backups."
-fi
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373
+# 3) The previous code:
+#	if [ "`echo $desturl | /usr/bin/awk -F ':' '{print $1}'`" == "s3+http" ]; then
+#  		[ -n "$awsaccesskeyid" -a -n "$awssecretaccesskey" ]  || fatal "AWS access keys must be set for S3 backups."
+#	fi
+# https://github.com/dmitrii-fediuk/5.9.188.84/blob/2024-09-20/usr/share/backupninja/dup#L69-L71
 
 if [ "`echo $desturl | /usr/bin/awk -F ':' '{print $1}'`" == "cf+http" ]; then
    [ -n "$cfusername" -a -n "$cfapikey" ]  || fatal "Cloudfiles access keys must be set for S3 backups."
