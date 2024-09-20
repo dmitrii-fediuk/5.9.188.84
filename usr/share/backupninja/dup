@@ -279,11 +279,18 @@ set +o noglob
 
 execstr_source=${execstr_source//\\*/\\\\\\*}
 
-### If desturl is an S3 URL export the AWS environment variables
-if [ "`echo $desturl | /usr/bin/awk -F ':' '{print $1}'`" == "s3+http" ]; then
-   export AWS_ACCESS_KEY_ID="$awsaccesskeyid"
-   export AWS_SECRET_ACCESS_KEY="$awssecretaccesskey"
-fi
+# 2024-09-20
+# 1) "Refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/107
+# 2) "How to refactor the AWS credentials (`awsaccesskeyid` and `awssecretaccesskey`)
+# out of the Backupninja's `/etc/backup.d/*.dup` configuration files?": https://df.tips/t/2373
+# 3) The previous code:
+#	### If desturl is an S3 URL export the AWS environment variables
+#	if [ "`echo $desturl | /usr/bin/awk -F ':' '{print $1}'`" == "s3+http" ]; then
+#		export AWS_ACCESS_KEY_ID="$awsaccesskeyid"
+#		export AWS_SECRET_ACCESS_KEY="$awssecretaccesskey"
+#	fi
+# https://github.com/dmitrii-fediuk/5.9.188.84/blob/2024-09-20/usr/share/backupninja/dup#L268-L272
 
 ### If desturl is a RackSpace's CloudFiles URL export the relevant
 ### environment variables
