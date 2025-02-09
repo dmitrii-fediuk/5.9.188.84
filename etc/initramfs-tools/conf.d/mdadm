@@ -1,0 +1,4 @@
+# 2025-02-09
+# "The server has stopped working properly on 2025-02-08":
+# https://github.com/dmitrii-fediuk/5.9.188.84/issues/109
+BOOT_DEGRADED=true
