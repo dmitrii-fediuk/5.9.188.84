@@ -1,4 +1,5 @@
 # 2025-02-09
-# "The server has stopped working properly on 2025-02-08":
+# 1) "The server has stopped working properly on 2025-02-08":
 # https://github.com/dmitrii-fediuk/5.9.188.84/issues/109
+# 2) "What is the syntax of `/etc/initramfs-tools/conf.d/*` files?": https://df.tips/t/2548
 BOOT_DEGRADED=true
