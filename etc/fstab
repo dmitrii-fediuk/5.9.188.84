@@ -1,4 +1,6 @@
 # 2025-02-09 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+# https://linux.die.net/man/5/fstab
+# https://archive.is/9lztS
 proc /proc proc defaults 0 0
 /dev/md/0 none swap sw 0 0
 /dev/md/1 /boot ext3 defaults 0 0
