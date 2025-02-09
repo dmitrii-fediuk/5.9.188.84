@@ -1,0 +1,5 @@
+# 2025-02-09 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+proc /proc proc defaults 0 0
+/dev/md/0 none swap sw 0 0
+/dev/md/1 /boot ext3 defaults 0 0
+/dev/md/2 / ext4 defaults 0 0
