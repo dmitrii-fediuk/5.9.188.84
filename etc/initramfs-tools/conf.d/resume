@@ -1,0 +1,6 @@
+# 2025-02-11 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+# 1) "Disable the hibernation mode": https://github.com/dmitrii-fediuk/5.9.188.84/issues/112
+# 2) "How to disable the hibernation mode for a Debian server?": https://df.tips/t/2555
+# 3) "Why do I get «The initramfs will attempt to resume from /dev/md0» on `update-initramfs -u`
+# after deleting `/etc/initramfs-tools/conf.d/resume`?": https://df.tips/t/2556
+RESUME=none
