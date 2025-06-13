@@ -5,5 +5,3 @@ proc /proc proc defaults 0 0
 /dev/md/0 none swap sw 0 0
 /dev/md/1 /boot ext3 defaults 0 0
 /dev/md/2 / ext4 defaults 0 0
-# 2025-02-11
-UUID=c9c23eab-6236-4dc3-b531-52ebf71bbccb   /sda4   ext4   defaults   0   0
