@@ -13,7 +13,12 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # Использую «> /dev/null», потому что для некоторых папок почему-то происходит сбой «Directory not empty».
 @monthly www-data rm -rf /var/www/server.magento-forum.ru/var/* > /dev/null
 
-*/30 * * * * www-data php7.2 /var/www/m2/sandbox/bin/magento cron:run
+# 2025-08-05
+# 1) "The server is busy with Cron jobs of the disabled `m2/sandbox` Magento website":
+# https://github.com/dmitrii-fediuk/5.9.188.84/issues/121
+# 2.1) https://g.co/gemini/share/751616c517f7
+# 2.2) https://g.co/gemini/share/27257af3fc49
+# */30 * * * * www-data php7.2 /var/www/m2/sandbox/bin/magento cron:run
 */30 * * * * www-data php7.2 /var/www/portal/bin/magento cron:run
 
 # 2019-05-09 Somebody overloads my PHP-FPM. Restarting it seems to solve the problem.
