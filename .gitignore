@@ -40,6 +40,7 @@
 /usr/local/discourse/credentials.yml
 /usr/local/nginx/conf/assets/securepay.ufc.ge/.pem
 /usr/local/nginx/conf/assets/securepay.ufc.ge/password.txt
+/usr/local/nginx/conf/sites/.htpasswd
 # 2024-07-16 "Refactor `/var/www/.ssh/*` files": https://github.com/dmitrii-fediuk/5.9.188.84/issues/71
 /var/www/.ssh/keys/*
 !/var/www/.ssh/keys/*.pub

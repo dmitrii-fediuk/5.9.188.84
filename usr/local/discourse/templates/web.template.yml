@@ -1,3 +1,4 @@
+base_image: discourse/base:2.0.20251003-1437
 env:
   # You can have redis on a different box
   RAILS_ENV: 'production'
@@ -12,7 +13,6 @@ env:
   DISCOURSE_DB_HOST:
   DISCOURSE_DB_PORT:
 
-
 params:
   # 2024-05-31 I moved `version` to `templates-my/1.yml`
   home: /var/www/discourse
@@ -24,7 +24,7 @@ run:
   - exec:
       tag: precompile
       cmd:
-        - /usr/local/bin/ruby -e 'if ENV["DISCOURSE_SMTP_ADDRESS"] == "smtp.example.com"; puts "Aborting! Mail is not configured!"; exit 1; end'
+        - /usr/local/bin/ruby -e 'if (ENV["DISCOURSE_SMTP_ADDRESS"] == "smtp.example.com" && ENV["DISCOURSE_SKIP_EMAIL_SETUP"] != "1"); puts "Aborting! Mail is not configured!"; exit 1; end'
         - /usr/local/bin/ruby -e 'if ENV["DISCOURSE_HOSTNAME"] == "discourse.example.com"; puts "Aborting! Domain is not configured!"; exit 1; end'
         - /usr/local/bin/ruby -e 'if (ENV["DISCOURSE_CDN_URL"] || "")[0..1] == "//"; puts "Aborting! CDN must have a protocol specified. Once fixed you should rebake your posts now to correct all posts."; exit 1; end'
   # TODO: move to base image (anacron can not be fired up using rc.d)
@@ -45,7 +45,7 @@ run:
         conf=/var/www/discourse/config/discourse.conf
 
         # find DISCOURSE_ env vars, strip the leader, lowercase the key
-        /usr/local/bin/ruby -e 'ENV.each{|k,v| puts "#{$1.downcase} = '\''#{v}'\''" if k =~ /^DISCOURSE_(.*)/}' > $conf
+        /usr/local/bin/ruby -e 'ENV.each{|k,v| puts "#{$1.downcase} = '\''#{v}'\''" if k =~ /^DISCOURSE_(.*)/}' | install -m 600 -o discourse /dev/stdin ${conf}
 
   - file:
      path: /etc/service/unicorn/run
@@ -57,12 +57,16 @@ run:
         # postgres
         cd $home
         chown -R discourse:www-data /shared/log/rails
+        # before precompile
         if [[ -z "$PRECOMPILE_ON_BOOT" ]]; then
           PRECOMPILE_ON_BOOT=1
         fi
-        if [ -f /usr/local/bin/create_db ] && [ "$CREATE_DB_ON_BOOT" = "1" ]; then /usr/local/bin/create_db; fi;
-        if [ "$MIGRATE_ON_BOOT" = "1" ]; then su discourse -c 'bundle exec rake db:migrate'; fi
-        if [ "$PRECOMPILE_ON_BOOT" = "1" ]; then SKIP_EMBER_CLI_COMPILE=1 su discourse -c 'bundle exec rake assets:precompile'; fi
+        if [ "$MIGRATE_ON_BOOT" = "1" ]; then
+          su discourse -c 'bundle exec rake db:migrate' || exit 1
+        fi
+        if [ "$PRECOMPILE_ON_BOOT" = "1" ]; then
+          SKIP_EMBER_CLI_COMPILE=1 su discourse -c 'bundle exec rake assets:precompile' || exit 1
+        fi
         LD_PRELOAD=$RUBY_ALLOCATOR HOME=/home/discourse USER=discourse exec thpoff chpst -u discourse:www-data -U discourse:www-data bundle exec config/unicorn_launcher -E production -c config/unicorn.conf.rb
 
   - file:
@@ -91,23 +95,11 @@ run:
       cd: $home
       hook: code
       cmd:
-        - sudo -H -E -u discourse git reset --hard
         - sudo -H -E -u discourse git clean -f
-        # TODO Remove the special handling of shallow clones when everyone uses images without that clone type
         - |-
           sudo -H -E -u discourse bash -c '
             set -o errexit
-            if [ $(git rev-parse --is-shallow-repository) == "true" ]; then
-                git remote set-branches --add origin main
-                git remote set-branches origin $version
-                git fetch --depth 1 origin $version
-            else
-                git fetch --tags --prune-tags --prune --force origin
-            fi
-          '
-        - |-
-          sudo -H -E -u discourse bash -c '
-            set -o errexit
+            git fetch --tags --prune-tags --prune --force origin
             if [[ $(git symbolic-ref --short HEAD) == $version ]] ; then
                 git pull
             else
@@ -137,32 +129,48 @@ run:
         - "rm /etc/nginx/sites-enabled/default"
         - "mkdir -p /var/nginx/cache"
 
+        # Stop building the container if the Nginx outlets are missing
+        - "grep -q 'outlets/before-server' /etc/nginx/conf.d/discourse.conf || ( >&2 echo 'The \"before-server\" Nginx outlet is missing. This version of discourse_docker is not compatible with the chosen Discourse version.' ; exit 1 )"
+        - "grep -q 'outlets/server' /etc/nginx/conf.d/discourse.conf || ( >&2 echo 'The \"server\" Nginx outlet is missing. This version of discourse_docker is not compatible with the chosen Discourse version.' ; exit 1 )"
+        - "grep -q 'outlets/discourse' /etc/nginx/conf.d/discourse.conf || ( >&2 echo 'The \"discourse\" Nginx outlet is missing. This version of discourse_docker is not compatible with the chosen Discourse version.' ; exit 1 )"
+
+        # Create placeholders for the Nginx outlets
+        - "mkdir -p /etc/nginx/conf.d/outlets/before-server"
+        - "touch /etc/nginx/conf.d/outlets/before-server/20-redirect-http-to-https.conf"
+        - "touch /etc/nginx/conf.d/outlets/before-server/30-ratelimited.conf"
+        - "mkdir -p /etc/nginx/conf.d/outlets/server"
+        - "touch /etc/nginx/conf.d/outlets/server/10-http.conf"
+        - "touch /etc/nginx/conf.d/outlets/server/20-https.conf"
+        - "touch /etc/nginx/conf.d/outlets/server/30-offline-page.conf"
+        - "mkdir -p /etc/nginx/conf.d/outlets/discourse"
+        - "touch /etc/nginx/conf.d/outlets/discourse/20-https.conf"
+        - "touch /etc/nginx/conf.d/outlets/discourse/30-ratelimited.conf"
+
   - replace:
       filename: /etc/nginx/nginx.conf
       from: pid /run/nginx.pid;
       to: daemon off;
 
   - replace:
-      filename: "/etc/nginx/conf.d/discourse.conf"
-      from: /upstream[^\}]+\}/m
-      to: "upstream discourse {
-        server 127.0.0.1:3000;
-      }"
-
-  - replace:
-      filename: "/etc/nginx/conf.d/discourse.conf"
-      from: /server_name.+$/
-      to: server_name _ ;
+      filename: "/etc/nginx/nginx.conf"
+      from: /worker_connections.+$/
+      to: worker_connections $nginx_worker_connections;
 
   - replace:
       filename: "/etc/nginx/conf.d/discourse.conf"
       from: /client_max_body_size.+$/
-      to: client_max_body_size $upload_size ;
+      to: client_max_body_size $upload_size;
 
-  - replace:
-      filename: "/etc/nginx/nginx.conf"
-      from: /worker_connections.+$/
-      to: worker_connections $nginx_worker_connections ;
+  - exec:
+      cmd:
+        # Move `listen 80` to an outlet
+        - sed -i 's#listen 80;##g' /etc/nginx/conf.d/discourse.conf
+        - |-
+          if [ -f "/proc/net/if_inet6" ]; then
+            echo "listen 80;\nlisten [::]:80;" > /etc/nginx/conf.d/outlets/server/10-http.conf
+          else
+            echo "listen 80;" > /etc/nginx/conf.d/outlets/server/10-http.conf
+          fi
 
   - exec:
       cmd: echo "done configuring web"
@@ -188,7 +196,7 @@ run:
             fi
             su discourse -c 'yarn install --frozen-lockfile && yarn cache clean'
           else
-            su discourse -c 'CI=1 pnpm install --frozen-lockfile'
+            su discourse -c 'CI=1 pnpm install --frozen-lockfile && pnpm prune'
           fi
 
   - exec:
@@ -196,6 +204,9 @@ run:
       hook: bundle_exec
       cmd:
         - su discourse -c 'bundle install --jobs $(($(nproc) - 1)) --retry 3'
+        - su discourse -c 'bundle clean'
+        - su discourse -c 'find /var/www/discourse/vendor/bundle -name cache -not -path "*/gems/*" -type d -exec rm -rf {} +'
+        - su discourse -c 'find /var/www/discourse/vendor/bundle -name tmp -type d -exec rm -rf {} +'
 
   - exec:
       cd: $home
@@ -222,10 +233,11 @@ run:
       hook: assets_precompile
       cmd:
         - su discourse -c 'SKIP_EMBER_CLI_COMPILE=1 bundle exec rake themes:update assets:precompile'
+
   - replace:
       tag: precompile
       filename: /etc/service/unicorn/run
-      from: PRECOMPILE_ON_BOOT=1
+      from: "# before precompile"
       to: "PRECOMPILE_ON_BOOT=0"
 
   - file:
@@ -240,13 +252,7 @@ run:
      chmod: +x
      contents: |
        #!/bin/bash
-       # If they requested a console, load pry instead
-       if [ "$*" == "c" -o "$*" == "console" ]
-       then
-        (cd /var/www/discourse && RAILS_ENV=production sudo -H -E -u discourse bundle exec pry -r ./config/environment)
-       else
-        (cd /var/www/discourse && RAILS_ENV=production sudo -H -E -u discourse bundle exec script/rails "$@")
-       fi
+       (cd /var/www/discourse && RAILS_ENV=production sudo -H -E -u discourse bundle exec script/rails "$@")
 
   - file:
      path: /usr/local/bin/rake
@@ -290,9 +296,7 @@ run:
                 delaycompress
                 compress
                 sharedscripts
-                postrotate
-                sv 1 unicorn
-                endscript
+                copytruncate
         }
 
   - file:
