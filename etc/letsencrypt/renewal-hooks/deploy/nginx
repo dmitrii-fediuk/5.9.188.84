@@ -1,3 +1,3 @@
-#!/bin/sh -eu
+#!/bin/sh
 # 2026-10-15 "Nginx periodically fails to start at midnight during the daily Certbot renewal job": https://github.com/dmitrii-fediuk/5.9.188.84/issues/122
-/usr/bin/systemctl reload nginx.service
+systemctl reload nginx.service

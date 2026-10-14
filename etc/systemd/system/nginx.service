@@ -6,13 +6,10 @@ Wants=network-online.target
 [Service]
 Type=forking
 PIDFile=/usr/local/nginx/logs/nginx.pid
-ExecStartPre=/usr/local/sbin/nginx -t -q
 ExecStart=/usr/local/sbin/nginx
-ExecReload=/usr/local/sbin/nginx -t -q
 ExecReload=/usr/local/sbin/nginx -s reload
 KillMode=mixed
-KillSignal=SIGQUIT
-TimeoutStopSec=30s
+TimeoutStopSec=5s
 Restart=on-failure
 RestartSec=5s
 [Install]
