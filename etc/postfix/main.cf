@@ -52,7 +52,9 @@ inet_interfaces = 127.0.0.1
 # See the `postconf(5)` manual
 # for a description of the `local_recipient_maps` and `unknown_local_recipient_reject_code` parameters.»
 # https://www.postfix.org/postconf.5.html#mydestination
-mydestination = localhost
+# 2026-10-25 "Fix Postfix HELO name and local destination domains in /etc/postfix/main.cf": https://github.com/dmitrii-fediuk/5.9.188.84/issues/133
+myhostname = magento-forum.ru
+mydestination = $myhostname, magento-forum.ru, localhost.localdomain, localhost
 # 2023-02-14
 # 1) «The internet hostname of this mail system.
 # The default is to use the fully-qualified domain name (FQDN) from gethostname(),
