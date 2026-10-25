@@ -117,6 +117,9 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # Use STARTTLS when the remote SMTP server supports it.
 # https://www.postfix.org/postconf.5.html#smtp_tls_security_level
 smtp_tls_security_level = may
+# Log TLS session details so encrypted outgoing delivery can be verified.
+# https://www.postfix.org/postconf.5.html#smtp_tls_loglevel
+smtp_tls_loglevel = 1
 # 2023-02-14
 # 1) Default: «».
 # 2) «File with the Postfix SMTP server RSA certificate in PEM format.
