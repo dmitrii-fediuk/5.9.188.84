@@ -1,0 +1,15 @@
+# /etc/aliases
+mailer-daemon: postmaster
+postmaster: root
+nobody: root
+hostmaster: root
+usenet: root
+news: root
+webmaster: root
+www: root
+ftp: root
+abuse: root
+noc: root
+security: root
+# 2026-10-25 "Add www-data alias to root in /etc/aliases": https://github.com/dmitrii-fediuk/5.9.188.84/issues/138
+www-data: root
